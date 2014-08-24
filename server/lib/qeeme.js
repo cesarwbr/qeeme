@@ -56,7 +56,9 @@ var bindQeeme = function(body, res) {
 	qeeme.properties.profession = result['/people/person/profession'];
 
 	var pBirth = result['/people/person/place_of_birth'];
-	qeeme.properties.place_of_birthday = new Place(pBirth.name,pBirth.geolocation,"map");
+	qeeme.properties.place_of_birthday = {}
+	qeeme.properties.place_of_birthday.name = pBirth.name;
+	qeeme.properties.place_of_birthday.location = pBirth.geolocation;
 
 	var parents = result['/people/person/parents'];
 	var children = result['/people/person/children'];

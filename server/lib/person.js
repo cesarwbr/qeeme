@@ -6,6 +6,7 @@ function getPerson(){
 	person['/people/person/gender'] = null;
 	person['/people/person/date_of_birth'] = null;
 	person['/people/deceased_person/date_of_death'] = null;
+	person['/common/topic/notable_for'] = [];
 	person['/people/person/place_of_birth'] = {
 		'name':null,
 		'geolocation':{
@@ -46,11 +47,11 @@ function getPerson(){
 		},
 		'institution':{
 			'name':null,
-			'/location/location/geolocation':[{
+			'/location/location/geolocation':{
 				'latitude':null,
 				'longitude':null,
 				'optional':true
-			}]
+			}
 		}
 	}];
 	person['/common/topic/official_website'] = [];
