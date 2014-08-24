@@ -25,7 +25,7 @@ var Qeeme = function() {
 
 	this.properties = {
 		gender: "",
-		image: "",
+		images: "",
 		age: "",
 		date_of_birthday: "",
 		date_of_death: "",
@@ -59,6 +59,8 @@ var bindQeeme = function(body, res) {
 	qeeme.properties.place_of_birthday = {}
 	qeeme.properties.place_of_birthday.name = pBirth.name;
 	qeeme.properties.place_of_birthday.location = pBirth.geolocation;
+
+	qeeme.properties.images = result['/common/topic/image'];
 
 	var parents = result['/people/person/parents'];
 	var children = result['/people/person/children'];

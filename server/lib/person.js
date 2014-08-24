@@ -3,6 +3,7 @@ function getPerson(){
 
 	person['mid'] = null;
 	person['name'] = null;
+	person['/common/topic/image'] = [];
 	person['/people/person/gender'] = null;
 	person['/people/person/date_of_birth'] = null;
 	person['/people/deceased_person/date_of_death'] = null;
