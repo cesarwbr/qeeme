@@ -10,7 +10,7 @@ var Place = function(name,geo,type) {
 	this.type = type;
 };
 
-var Person = function(mid,name,gender,images){
+var Simbling = function(mid,name,gender,images){
 	this.mid = mid;
 	this.name = name;
 	this.gender = gender;
@@ -66,12 +66,12 @@ var bindQeeme = function(body, res) {
 
 	for(var item in parents ){
 		var p = parents[item];
-		qeeme.properties.family.parents.push(new Person(p.mid,p.name,p.gender,p['/common/topic/image']));
+		qeeme.properties.family.parents.push(new Simbling(p.mid,p.name,p.gender,p['/common/topic/image']));
 	}
 
 	for(var item in children ){
 		var c = children[item];
-		qeeme.properties.family.children.push(new Person(c.mid,c.name,c.gender,c['/common/topic/image']));
+		qeeme.properties.family.children.push(new Simbling(c.mid,c.name,c.gender,c['/common/topic/image']));
 	}
 
 	for(var item in education ){
