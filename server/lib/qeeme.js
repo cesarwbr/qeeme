@@ -1,16 +1,9 @@
 var request = require('request'),
-	query = require('./queries').queries;
+	query = require('./person').mql;
 
 var BASE_URL = "https://www.googleapis.com/freebase/v1/mqlread?query=";
 
 var Place = function(name,geo,type) {
-	console.log(geo);
-	//http://maps.google.com/maps?z=12&t=m&q=loc:38.9419+-78.3020
-
-	/*	z is the zoom level (1-20)
-		t is the map type ("m" map, "k" satellite, "h" hybrid, "p" terrain, "e" GoogleEarth)
-		q is the search query, if it is prefixed by loc: then google assumes it is a lat lon separated by a +
-	*/
 	var map = "http://maps.google.com/maps?z=1&t=m&q=loc:"+geo.latitude+"+"+geo.longitude;
 	this.name = name;
 	this.map = map;
@@ -42,11 +35,7 @@ var Qeeme = function() {
 			parents: [],
 			children: []
 		},
-		education: [{
-			name:"",
-			place:"",
-			degree:""
-		}],
+		education: [],
 		profession: ""
 	};
 
@@ -76,8 +65,8 @@ var bindQeeme = function(body, res) {
 	//FIX-ME Replicated code
 
 	for(var item in parents ){
-		var c = parents[item];
-		qeeme.properties.family.parents.push(new Person(c.mid,c.name,c.gender,c['/common/topic/image']));
+		var p = parents[item];
+		qeeme.properties.family.parents.push(new Person(p.mid,p.name,p.gender,p['/common/topic/image']));
 	}
 
 	for(var item in children ){
@@ -86,22 +75,25 @@ var bindQeeme = function(body, res) {
 	}
 
 	for(var item in education ){
-		var c = education[item];
-		var e = {};
-		var p = c['institution']['/location/location/geolocation'][0];
-		if(p)
-			e.place = new Place(c.name,c['institution']['/location/location/geolocation'][0],"map");
-		if(c.degree)
-			e.degree = c.degree.name;
-		e.name = c['institution'].name;
-		//FIX-ME .. can have blank values
+		var e = education[item];
+		if(e['degree'] !== null){
+			var edu = {};
+			edu['degree'] = e['degree']['name'];
+			edu['institution'] = {};
+			edu['institution']['name'] = e['institution']['name'];
+			edu['institution']['location'] = e['institution']['/location/location/geolocation'];
+			qeeme.properties.education.push(edu);
+		}
 	}
 
 	res.send(qeeme);
 };
 
 var doRequest = function(mid, res) {
-	var url = BASE_URL + '{"mid": "' + mid + query.person;
+	var mql = query.person;
+	mql['mid'] = mid;
+	var payload = JSON.stringify(mql);
+	var url = BASE_URL + payload;
 	request(url, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
 			bindQeeme(body, res);
