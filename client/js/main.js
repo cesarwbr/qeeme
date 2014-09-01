@@ -304,15 +304,6 @@ var loadCanvas = function() {
     context.lineWidth = 5;
     context.stroke();
 
-    // var headerImage = new Image();
-    // headerImage.onload = function() {
-    //     context.drawImage(headerImage, 0, 0);
-    // };
-    //
-    // headerImage.src = 'https://www.googleapis.com/freebase/v1/image' + '/m/0hj4q_0' + '? ' +
-    //     'key=AIzaSyCQXvFx7PMLEImgshuRNJ_vlngLBCTVxkA' + '&maxwidth=' + qeeme.width;
-
-
     var personImage = new Image();
 
     var headerImage = new Image();
@@ -364,27 +355,6 @@ var loadCanvas = function() {
         context.textBaseline = 'top';
         context.fillStyle = color.icon;
         context.fillText('m', qeeme.width - 145, 62);
-
-        // var stage = new Kinetic.Stage({
-        //   container: 'dart',
-        //   width: 100,
-        //   height: 200
-        // });
-        //
-        // var layer = new Kinetic.Layer();
-        // darth = new Kinetic.Image({
-        //   x: 10,
-        //   y: 10,
-        //   image: personImage,
-        //   blurRadius: 20
-        // });
-        //
-        // layer.add(darth);
-        // stage.add(layer);
-        //
-        // darth.cache();
-        // darth.filters([Kinetic.Filters.Blur]);
-        // layer.draw();
 
         // Save the state, so we can undo the clipping
         context.save();
@@ -441,28 +411,6 @@ var loadCanvas = function() {
     };
 
     headerImage.src = getImageUrl(person.properties.image, qeeme.width);
-
-
-
-
-    // var imageLoader = document.getElementById('imageLoader');
-    // imageLoader.addEventListener('change', loadImage, false);
-    //
-    // function loadImage(e) {
-    //     var reader = new FileReader();
-    //     reader.onload = function(event) {
-    //         personImage.src = event.target.result;
-    //     };
-    //     reader.readAsDataURL(e.target.files[0]);
-    //     return false;
-    // }
-    // if(window.innerHeight > window.innerWidth) {
-    //     orientation = 'landscape';
-    // } else {
-    //     orientation = 'portrait';
-    // }
-
-    //document.querySelector('header h1').innerHTML = orientation;
 };
 var orientation2;
 if(window.innerHeight > window.innerWidth) {
