@@ -1,19 +1,34 @@
 var utils = require('./utils').Utils();
+var request = require('request');
 var props = require('./map').props;
 var mql_person = require('./mql_person.js').person;
 
-exports.createQuery = function createQuery(mid, opt) {
+exports.search = function search(mid, opt, callBack) {
 	var url = utils.getBaseUrl();
 
 	switch (opt) {
 		case "person":
 			mql_person.mid = mid;
-			return url + JSON.stringify(mql_person);
+			url += JSON.stringify(mql_person);
+			break;
 
 		case "animal":
 			return "" //TODO
+			break;
 
 	}
+
+	request(url, function(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			if (!!callBack) {
+				callBack(body);
+			}
+		} else {
+			//TODO handle errors
+		}
+	});
+
+
 
 };
 

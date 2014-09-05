@@ -5,7 +5,7 @@ var qeeme = require('../lib/qeeme');
 
 router.post('/', function(req, res) {
 	var mid = req.body.mid;
-	qeeme.createQuery(mid, "person", res);
+	qeeme.search(mid, "person", res);
 });
 
 module.exports = router;

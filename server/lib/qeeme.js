@@ -6,18 +6,11 @@ var bindQeeme = function(body, res) {
 	res.send(f2q.toQeeme(result));
 };
 
-var doRequest = function(mid, opt, res) {
-	var url = f2q.createQuery(mid, opt);
-	request(url, function(error, response, body) {
-		if (!error && response.statusCode == 200) {
-			bindQeeme(body, res);
-		}
-	});
-};
-
 var qeeme = {
-	createQuery: function(mid, opt, res) {
-		doRequest(mid, opt, res);
+	search: function(mid, opt, res) {
+		f2q.search(mid, opt,function(data){
+			bindQeeme(data,res);
+		});
 	}
 };
 
