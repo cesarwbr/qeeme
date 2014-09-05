@@ -1,39 +1,17 @@
-exports.fPath = function fPath() {
+exports.Utils = function Utils() {
 
-	var result;
-	var map;
+	var baseUrl = "https://www.googleapis.com/freebase/v1/mqlread?query=";
 
-	function bind(key) {
-		var path = map[key];
-		var p = path.split(".");
-		if (p.length > 1)
-			return (result[p[0] + "." + p[1]][p[1]]);
-		return (result[p[0]][p[0]]);
+	function replaceAll(find, replace, str) {
+		return str.replace(new RegExp(find, 'g'), replace);
 	}
 
-	function fetch(key,detArr){
-		var path = map[key];
-		var details = "";
-		if(detArr){
-			for(var item in detArr){
-				details+="("+map[detArr[item]]+")";
-			}
-		}
-		return "( "+path+" "+details+" )";
-	}
-
-	function setResult(r){
-		result = r;
-	}
-
-	function setMap(m){
-		map = m;
+	function getBaseUrl() {
+		return baseUrl;
 	}
 
 	return {
-		bind:bind,
-		fetch:fetch,
-		setResult:setResult,
-		setMap:setMap
+		getBaseUrl: getBaseUrl,
+		replaceAll: replaceAll
 	}
 }

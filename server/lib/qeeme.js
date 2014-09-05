@@ -1,25 +1,23 @@
 var request = require('request'),
-	query = require('./person');
+	f2q = require('./f2q');
 
 var bindQeeme = function(body, res) {
 	var result = JSON.parse(body).result;
-	res.send(query.toQeeme(result));
+	res.send(f2q.toQeeme(result));
 };
 
-var doRequest = function(mid, res) {
-	var url = query.search(mid);
-	console.log(url);
+var doRequest = function(mid, opt, res) {
+	var url = f2q.createQuery(mid, opt);
 	request(url, function(error, response, body) {
 		if (!error && response.statusCode == 200) {
-			console.log(body);
 			bindQeeme(body, res);
 		}
 	});
 };
 
 var qeeme = {
-	search: function(mid, res) {
-		doRequest(mid, res);
+	createQuery: function(mid, opt, res) {
+		doRequest(mid, opt, res);
 	}
 };
 
