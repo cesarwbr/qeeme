@@ -22,7 +22,8 @@ exports.person = {
     "/common/topic/image": [{
       "mid": null,
       "optional": true
-    }]
+    }],
+    "optional": true
   }],
   "/people/person/children": [{
     "mid": null,
@@ -31,7 +32,8 @@ exports.person = {
     "/common/topic/image": [{
       "mid": null,
       "optional": true
-    }]
+    }],
+    "optional": true
   }],
   "/people/person/profession": [],
   "/common/topic/image": [{
