@@ -5,7 +5,6 @@ var mql_person = require('./mql_person.js').person;
 
 exports.search = function search(mid, opt, callBack) {
 	var url = utils.getBaseUrl();
-
 	switch (opt) {
 		case "person":
 			mql_person.mid = mid;
