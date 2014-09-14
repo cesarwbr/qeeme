@@ -2,8 +2,7 @@ var request = require('request'),
 	f2q = require('./f2q');
 
 var bindQeeme = function(body, res) {
-	var result = JSON.parse(body).result;
-	res.send(f2q.toQeeme(result));
+	res.send(f2q.toQeeme(body));
 };
 
 var qeeme = {

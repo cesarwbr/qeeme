@@ -1,4 +1,4 @@
-exports.person = {
+exports.person = [{
 
   "mid": null,
   "name": null,
@@ -73,4 +73,4 @@ exports.person = {
   }],
   "/common/topic/official_website": []
 
-};
+}];
