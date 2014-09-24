@@ -318,17 +318,17 @@ var loadCanvas = function() {
 
     // children
     var addChild = function(name, i) {
-      var left = i + 1;
-      left = Math.pow(left, 2);
+      var left = 50 + 100 * i;
+
       // icon
       context.font = '30px qeeme';
       context.textBaseline = 'top';
       context.fillStyle = color.female;
-      context.fillText('i', (40 * left) - 15, 182);
+      context.fillText('i', left - 15, 232);
 
       // icon circle
       context.beginPath();
-      context.arc(40 * left, 200, 20, 0, Math.PI * 2, false);
+      context.arc(left, 250, 20, 0, Math.PI * 2, false);
       context.closePath();
       context.strokeStyle = color.circleBg;
       context.lineWidth = 4;
@@ -337,7 +337,8 @@ var loadCanvas = function() {
       context.font = 'bold 12px Roboto';
       context.textBaseline = 'top';
       context.fillStyle = color.subtitle;
-      context.fillText(name, 40 * left, 230);
+      console.log("text: " + context.measureText(name).width);
+      context.fillText(name, left - parseInt(context.measureText(name).width / 2), 280);
     };
 
     for(var i = 0; i < person.properties.family.children.length; i++) {
