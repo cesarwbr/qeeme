@@ -25,7 +25,12 @@ var loadCanvas = function() {
                     gender: 'female'
                 }],
                 children: [{
-                    name: 'Child 1',
+                    name: 'Natasha Obama',
+                    mid: '/m/sdfew23',
+                    image: '/m/234233',
+                    gender: 'female'
+                }, {
+                    name: 'Malia Ann Obama',
                     mid: '/m/sdfew23',
                     image: '/m/234233',
                     gender: 'female'
@@ -286,6 +291,9 @@ var loadCanvas = function() {
 
     var color = color5;
 
+    color.female = '#db147b';
+    color.male = '#0092dd';
+
     document.querySelector('body').style.background = color.bg;
     document.querySelector('header h1').innerHTML = person.name;
 
@@ -303,6 +311,40 @@ var loadCanvas = function() {
     context.strokeStyle = color.circleBg;
     context.lineWidth = 5;
     context.stroke();
+
+    var countChildren
+
+    // person.properties.family.children.name
+
+    // children
+    var addChild = function(name, i) {
+      var left = i + 1;
+      left = Math.pow(left, 2);
+      // icon
+      context.font = '30px qeeme';
+      context.textBaseline = 'top';
+      context.fillStyle = color.female;
+      context.fillText('i', (40 * left) - 15, 182);
+
+      // icon circle
+      context.beginPath();
+      context.arc(40 * left, 200, 20, 0, Math.PI * 2, false);
+      context.closePath();
+      context.strokeStyle = color.circleBg;
+      context.lineWidth = 4;
+      context.stroke();
+
+      context.font = 'bold 12px Roboto';
+      context.textBaseline = 'top';
+      context.fillStyle = color.subtitle;
+      context.fillText(name, 40 * left, 230);
+    };
+
+    for(var i = 0; i < person.properties.family.children.length; i++) {
+        addChild(person.properties.family.children[i].name, i);
+    }
+
+
 
     var personImage = new Image();
 
