@@ -317,14 +317,10 @@ var loadCanvas = function() {
     context.lineWidth = 5;
     context.stroke();
 
-    var countChildren
-
-    // person.properties.family.children.name
-
     // children
     var addChild = function(child, i) {
       var firstName = child.name.split(' ')[0];
-      var left = 50 + 70 * i;
+      var left = 50 + 65 * i;
       var iconColor = color[child.gender];
       var iconLetter = child.gender === 'male' ? 'o' : 'n';
 
@@ -346,14 +342,12 @@ var loadCanvas = function() {
       context.textBaseline = 'top';
       context.fillStyle = color.subtitle;
       console.log("text: " + context.measureText(firstName).width);
-      context.fillText(firstName, left - parseInt(context.measureText(firstName).width / 2), 280);
+      context.fillText(firstName, left - parseInt(context.measureText(firstName).width / 2), 275);
     };
 
     for(var i = 0; i < person.properties.family.children.length; i++) {
         addChild(person.properties.family.children[i], i);
     }
-
-
 
     var personImage = new Image();
 
