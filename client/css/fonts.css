@@ -77,3 +77,9 @@
 .icon-marker:before {
   content: "m";
 }
+.icon-female-rounded-1:before {
+  content: "n";
+}
+.icon-male-rounded-1:before {
+  content: "o";
+}

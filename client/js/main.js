@@ -34,6 +34,11 @@ var loadCanvas = function() {
                     mid: '/m/sdfew23',
                     image: '/m/234233',
                     gender: 'female'
+                }, {
+                    name: 'John da Silva',
+                    mid: '/m/sdfew23',
+                    image: '/m/234233',
+                    gender: 'male'
                 }]
             },
             education: {
@@ -317,14 +322,17 @@ var loadCanvas = function() {
     // person.properties.family.children.name
 
     // children
-    var addChild = function(name, i) {
-      var left = 50 + 100 * i;
+    var addChild = function(child, i) {
+      var firstName = child.name.split(' ')[0];
+      var left = 50 + 70 * i;
+      var iconColor = color[child.gender];
+      var iconLetter = child.gender === 'male' ? 'o' : 'n';
 
       // icon
-      context.font = '30px qeeme';
+      context.font = '23px qeeme';
       context.textBaseline = 'top';
-      context.fillStyle = color.female;
-      context.fillText('i', left - 15, 232);
+      context.fillStyle = iconColor;
+      context.fillText(iconLetter, left - 11, 237);
 
       // icon circle
       context.beginPath();
@@ -337,12 +345,12 @@ var loadCanvas = function() {
       context.font = 'bold 12px Roboto';
       context.textBaseline = 'top';
       context.fillStyle = color.subtitle;
-      console.log("text: " + context.measureText(name).width);
-      context.fillText(name, left - parseInt(context.measureText(name).width / 2), 280);
+      console.log("text: " + context.measureText(firstName).width);
+      context.fillText(firstName, left - parseInt(context.measureText(firstName).width / 2), 280);
     };
 
     for(var i = 0; i < person.properties.family.children.length; i++) {
-        addChild(person.properties.family.children[i].name, i);
+        addChild(person.properties.family.children[i], i);
     }
 
 
