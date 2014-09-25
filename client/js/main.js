@@ -16,7 +16,7 @@ var loadCanvas = function() {
         parents: [{
           name: 'Barack Obama, Sr.',
           mid: '/m/sdfew23',
-          image: '/m/042syxv',
+          image: '/m/059x99z',
           gender: 'male'
         }, {
           name: 'Ann Dunham',
@@ -366,8 +366,8 @@ var loadCanvas = function() {
         r = imgHeight / 2;
       }
 
-      var redfx = position.x;
-      var redfy = position.y;
+      var redfx = position.x - 7;
+      var redfy = position.y - 5;
 
       var posx = r + redfx;
       var posy = r + redfy;
@@ -385,7 +385,7 @@ var loadCanvas = function() {
       context.restore();
     };
 
-    familyImage.src = getImageUrl(imageId, 35);
+    familyImage.src = getImageUrl(imageId, 36);
   };
 
   var addParent = function(parent, i) {
