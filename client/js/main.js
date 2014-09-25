@@ -320,7 +320,7 @@ var loadCanvas = function() {
     // children
     var addChild = function(child, i) {
       var firstName = child.name.split(' ')[0];
-      var left = 50 + 65 * i;
+      var left = (qeeme.width / 2) - 90 - 65 * i;
       var iconColor = color[child.gender];
       var iconLetter = child.gender === 'male' ? 'o' : 'n';
 
@@ -345,8 +345,41 @@ var loadCanvas = function() {
       context.fillText(firstName, left - parseInt(context.measureText(firstName).width / 2), 275);
     };
 
-    for(var i = 0; i < person.properties.family.children.length; i++) {
+    var i;
+
+    for(i = 0; i < person.properties.family.children.length; i++) {
         addChild(person.properties.family.children[i], i);
+    }
+
+    var addParent = function(parent, i) {
+      var firstName = parent.name.split(' ')[0];
+      var left = (qeeme.width / 2) + 90 + 65 * i;
+      var iconColor = color[parent.gender];
+      var iconLetter = parent.gender === 'male' ? 'j' : 'i';
+
+      // icon
+      context.font = '23px qeeme';
+      context.textBaseline = 'top';
+      context.fillStyle = iconColor;
+      context.fillText(iconLetter, left - 11, 237);
+
+      // icon circle
+      context.beginPath();
+      context.arc(left, 250, 20, 0, Math.PI * 2, false);
+      context.closePath();
+      context.strokeStyle = color.circleBg;
+      context.lineWidth = 4;
+      context.stroke();
+
+      context.font = 'bold 12px Roboto';
+      context.textBaseline = 'top';
+      context.fillStyle = color.subtitle;
+      console.log("text: " + context.measureText(firstName).width);
+      context.fillText(firstName, left - parseInt(context.measureText(firstName).width / 2), 275);
+    };
+
+    for(i = 0; i < person.properties.family.parents.length; i++) {
+        addParent(person.properties.family.parents[i], i);
     }
 
     var personImage = new Image();
