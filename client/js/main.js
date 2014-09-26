@@ -317,6 +317,20 @@ var loadCanvas = function() {
   context.lineWidth = 5;
   context.stroke();
 
+  // icon 2
+  context.font = '35px qeeme';
+  context.textBaseline = 'top';
+  context.fillStyle = color.icon;
+  context.fillText('e', (qeeme.width / 2) - 17, 355);
+
+  // icon circle
+  context.beginPath();
+  context.arc((qeeme.width / 2), 370, 25, 0, Math.PI * 2, false);
+  context.closePath();
+  context.strokeStyle = color.circleBg;
+  context.lineWidth = 5;
+  context.stroke();
+
   // children
   var addChild = function(child, i) {
     var firstName = child.name.split(' ')[0];
@@ -426,6 +440,16 @@ var loadCanvas = function() {
   for (i = 0; i < person.properties.family.parents.length; i++) {
     addParent(person.properties.family.parents[i], i);
   }
+
+  // Map
+  var google_tile =
+    'http://maps.google.com/maps/api/staticmap?sensor=false&center=-34.397,150.644&zoom=8&size=300x150';
+  var imageObj = new Image();
+  imageObj.src = google_tile;
+
+  imageObj.onload = function() {
+    context.drawImage(imageObj, (qeeme.width / 2) - 150, 420);
+  };
 
   var personImage = new Image();
 
