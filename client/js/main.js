@@ -27,17 +27,16 @@ var loadCanvas = function() {
         children: [{
           name: 'Natasha Obama',
           mid: '/m/sdfew23',
-          image: '/m/234233',
+          image: '/m/0cqb0v1',
           gender: 'female'
         }, {
           name: 'Malia Ann Obama',
           mid: '/m/sdfew23',
-          image: '/m/234233',
           gender: 'female'
         }, {
           name: 'John da Silva',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
+          mid: '/m/05m3q8j',
+          image: '/m/05m3q8j',
           gender: 'male'
         }]
       },
@@ -331,40 +330,6 @@ var loadCanvas = function() {
   context.lineWidth = 5;
   context.stroke();
 
-  // children
-  var addChild = function(child, i) {
-    var firstName = child.name.split(' ')[0];
-    var left = (qeeme.width / 2) - 90 - 65 * i;
-    var iconColor = color[child.gender];
-    var iconLetter = child.gender === 'male' ? 'o' : 'n';
-
-    // icon
-    context.font = '23px qeeme';
-    context.textBaseline = 'top';
-    context.fillStyle = iconColor;
-    context.fillText(iconLetter, left - 11, 237);
-
-    // icon circle
-    context.beginPath();
-    context.arc(left, 250, 20, 0, Math.PI * 2, false);
-    context.closePath();
-    context.strokeStyle = color.circleBg;
-    context.lineWidth = 4;
-    context.stroke();
-
-    context.font = 'bold 12px Roboto';
-    context.textBaseline = 'top';
-    context.fillStyle = color.subtitle;
-    console.log("text: " + context.measureText(firstName).width);
-    context.fillText(firstName, left - parseInt(context.measureText(firstName).width /
-      2), 275);
-  };
-
-  var i;
-
-  for (i = 0; i < person.properties.family.children.length; i++) {
-    addChild(person.properties.family.children[i], i);
-  }
 
   var loadFamilyImage = function(imageId, position) {
     var familyImage = new Image();
@@ -401,6 +366,50 @@ var loadCanvas = function() {
 
     familyImage.src = getImageUrl(imageId, 36);
   };
+
+  // children
+  var addChild = function(child, i) {
+    var firstName = child.name.split(' ')[0];
+    var left = (qeeme.width / 2) - 90 - 65 * i;
+    var iconColor = color[child.gender];
+    var iconLetter = child.gender === 'male' ? 'o' : 'n';
+
+    if ( !! child.image) {
+      loadFamilyImage(child.image, {
+        x: left - 11,
+        y: 237
+      });
+    } else {
+      // icon
+      context.font = '23px qeeme';
+      context.textBaseline = 'top';
+      context.fillStyle = iconColor;
+      context.fillText(iconLetter, left - 11, 237);
+    }
+
+    // icon circle
+    context.beginPath();
+    context.arc(left, 250, 20, 0, Math.PI * 2, false);
+    context.closePath();
+    context.strokeStyle = color.circleBg;
+    context.lineWidth = 4;
+    context.stroke();
+
+    context.font = 'bold 12px Roboto';
+    context.textBaseline = 'top';
+    context.fillStyle = color.subtitle;
+    console.log("text: " + context.measureText(firstName).width);
+    context.fillText(firstName, left - parseInt(context.measureText(firstName).width /
+      2), 275);
+  };
+
+  var i;
+
+  for (i = 0; i < person.properties.family.children.length; i++) {
+    addChild(person.properties.family.children[i], i);
+  }
+
+
 
   var addParent = function(parent, i) {
     var firstName = parent.name.split(' ')[0];
@@ -443,7 +452,7 @@ var loadCanvas = function() {
 
   // Map
   var google_tile =
-    'http://maps.google.com/maps/api/staticmap?sensor=false&center=-34.397,150.644&zoom=8&size=300x150';
+    'http://maps.google.com/maps/api/staticmap?sensor=false&center=21.3,-157.816667&zoom=8&size=300x150';
   var imageObj = new Image();
   imageObj.src = google_tile;
 

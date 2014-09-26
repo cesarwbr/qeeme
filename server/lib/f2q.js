@@ -27,7 +27,7 @@ function getFromFreebase(mid, opt, callBack) {
 		freebase.notable(mid, {}, function(n) {
 			queryResult.result[0].notable = n;
 			callBack(queryResult);
-		})
+		});
 	});
 
 }

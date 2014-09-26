@@ -13,5 +13,5 @@ exports.Utils = function Utils() {
 	return {
 		getBaseUrl: getBaseUrl,
 		replaceAll: replaceAll
-	}
-}
+	};
+};

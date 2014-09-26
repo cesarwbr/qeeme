@@ -83,3 +83,9 @@
 .icon-male-rounded-1:before {
   content: "o";
 }
+.icon-briefcase:before {
+  content: "p";
+}
+.icon-book:before {
+  content: "q";
+}
