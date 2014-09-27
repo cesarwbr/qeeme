@@ -364,7 +364,9 @@ var loadCanvas = function() {
     "social_presence": [],
     "children": [],
     "name": "Marina Silva",
-    "profession": ["Environmentalist", "Politician", "Pedagogy", "Historian"],
+    "profession": ["Environmentalist", "Politician", "Pedagogy",
+      "Historian"
+    ],
     "images": [{
       "mid": "/m/04g6qq9"
     }],
@@ -445,8 +447,10 @@ var loadCanvas = function() {
 
   var person6 = {
     "profession": ["Singer", "Singer-songwriter", "Musician", "Artist",
-      "Drummer", "Guitarist", "Keyboard Player", "Pianist", "Social activist",
-      "Poet", "Entrepreneur", "Record producer", "Composer", "Film Producer",
+      "Drummer", "Guitarist", "Keyboard Player", "Pianist",
+      "Social activist",
+      "Poet", "Entrepreneur", "Record producer", "Composer",
+      "Film Producer",
       "Businessperson", "Peace activist", "Bassist", "Songwriter",
       "Film Score Composer", "Multi-instrumentalist", "Television producer",
       "Screenwriter", "Television Director", "Actor", "Music artist"
@@ -687,7 +691,86 @@ var loadCanvas = function() {
     }
   };
 
-  var person = person8;
+  var person9 = {
+    "profession": ["Songwriter", "Singer", "Musician", "Drummer",
+      "Guitarist",
+      "Multi-instrumentalist", "Actor", "Film director",
+      "Singer-songwriter"
+    ],
+    "education": [{
+      "degree": null,
+      "institution": {
+        "name": "Bishop Ireton High School",
+        "geolocation": []
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "name": "Thomas Jefferson High School",
+        "geolocation": []
+      }
+    }],
+    "date_of_birth": "1969-01-14",
+    "facebook": [],
+    "website": [],
+    "twitter": [],
+    "gender": "Male",
+    "gplus": [],
+    "name": "Dave Grohl",
+    "mid": "/m/0285c",
+    "parents": [{
+      "name": "James Grohl",
+      "mid": "/m/0q4gbjj",
+      "images": [],
+      "gender": "Male"
+    }, {
+      "name": "Virginia Grohl",
+      "mid": "/m/0q4gbqc",
+      "images": [],
+      "gender": "Female"
+    }],
+    "place_of_birth": {
+      "name": "Warren",
+      "geolocation": {
+        "longitude": -80.814444,
+        "latitude": 41.238333
+      }
+    },
+    "date_of_death": null,
+    "images": [{
+      "mid": "/m/02dt21h"
+    }, {
+      "mid": "/m/04pvq3f"
+    }, {
+      "mid": "/m/063fmbh"
+    }],
+    "social_presence": [],
+    "children": [{
+      "name": "Violet Maye Grohl",
+      "mid": "/m/063xy7y",
+      "images": [],
+      "gender": "Female"
+    }, {
+      "name": "Harper Willow Grohl",
+      "mid": "/m/0jmvj24",
+      "images": [],
+      "gender": "Female"
+    }, {
+      "name": "Ophelia Grohl",
+      "mid": "/m/011lzhyl",
+      "images": [],
+      "gender": "Female"
+    }],
+    "nationality": ["United States of America"],
+    "notable": {
+      "text": "Celebrity",
+      "lang": "en",
+      "id": "/celebrities/celebrity",
+      "name": "Celebrity"
+    }
+  };
+
+  var person = person9;
   var qeeme = document.getElementById('qeeme');
   qeeme.width = window.innerWidth;
   qeeme.height = 745;
@@ -767,13 +850,22 @@ var loadCanvas = function() {
   };
 
   // family
-  addSection('a', {x: (qeeme.width / 2), y: 200});
+  addSection('a', {
+    x: (qeeme.width / 2),
+    y: 200
+  });
 
   // place of bird
-  addSection('e', {x: (qeeme.width / 2), y: 370});
+  addSection('e', {
+    x: (qeeme.width / 2),
+    y: 370
+  });
 
   // profession
-  addSection('p', {x: (qeeme.width / 2), y: 650});
+  addSection('p', {
+    x: (qeeme.width / 2),
+    y: 650
+  });
 
 
 
@@ -790,6 +882,8 @@ var loadCanvas = function() {
       } else {
         r = imgHeight / 2;
       }
+
+      r = 18;
 
       var redfx = position.x - 7;
       var redfy = position.y - 5;
@@ -811,6 +905,7 @@ var loadCanvas = function() {
     };
 
     familyImage.src = getImageUrl(imageId, 36);
+    return true;
   };
 
   // children
@@ -818,7 +913,7 @@ var loadCanvas = function() {
     var firstName = child.name.split(' ')[0];
     var left = (qeeme.width / 2) - 90 - 65 * i;
     var iconColor,
-        iconLetter;
+      iconLetter;
 
     if (!!child.gender) {
       iconColor = color[child.gender.toLowerCase()];
@@ -828,12 +923,11 @@ var loadCanvas = function() {
       iconLetter = 'o';
     }
 
-    if ( !! child.images && child.images.length > 0) {
-      loadFamilyImage(child.images[0].mid, {
+    if (!child.images || child.images.length === 0 || !loadFamilyImage(
+      child.images[0].mid, {
         x: left - 11,
         y: 237
-      });
-    } else {
+      })) {
       // icon
       context.font = '23px qeeme';
       context.textBaseline = 'top';
@@ -853,7 +947,8 @@ var loadCanvas = function() {
     context.textBaseline = 'top';
     context.fillStyle = color.subtitle;
     console.log("text: " + context.measureText(firstName).width);
-    context.fillText(firstName, left - parseInt(context.measureText(firstName).width /
+    context.fillText(firstName, left - parseInt(context.measureText(
+        firstName).width /
       2), 275);
   };
 
@@ -870,7 +965,7 @@ var loadCanvas = function() {
     var left = (qeeme.width / 2) + 90 + 65 * i;
 
     var iconColor,
-        iconLetter;
+      iconLetter;
 
     if (!!parent.gender) {
       iconColor = color[parent.gender.toLowerCase()];
@@ -880,7 +975,7 @@ var loadCanvas = function() {
       iconLetter = 'j';
     }
 
-    if ( !! parent.images && parent.images.length > 0) {
+    if (!!parent.images && parent.images.length > 0) {
       loadFamilyImage(parent.images[0].mid, {
         x: left - 11,
         y: 237
@@ -905,7 +1000,8 @@ var loadCanvas = function() {
     context.textBaseline = 'top';
     context.fillStyle = color.subtitle;
     console.log("text: " + context.measureText(firstName).width);
-    context.fillText(firstName, left - parseInt(context.measureText(firstName).width /
+    context.fillText(firstName, left - parseInt(context.measureText(
+        firstName).width /
       2), 275);
   };
 
@@ -913,7 +1009,7 @@ var loadCanvas = function() {
     addParent(person.parents[i], i);
   }
 
-  // Map
+  // Map place of birth
   var latitude = person.place_of_birth.geolocation.latitude;
   var longitude = person.place_of_birth.geolocation.longitude;
   var mapWidth = qeeme.width;
@@ -921,23 +1017,24 @@ var loadCanvas = function() {
     mapWidth = 200;
   }
   var google_tile =
-    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' + latitude +',' + longitude + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
-  var imageObj = new Image();
-  imageObj.src = google_tile;
+    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
+    latitude + ',' + longitude + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
+  var imageMap = new Image();
+  imageMap.src = google_tile;
 
-  imageObj.onload = function() {
+  imageMap.onload = function() {
     context.save();
     context.beginPath();
     var r,
-      imgWidth = imageObj.width,
-      imgHeight = imageObj.height;
+      imgWidth = imageMap.width,
+      imgHeight = imageMap.height;
     if (imgWidth < imgHeight) {
       r = imgWidth / 2;
     } else {
       r = imgHeight / 2;
     }
 
-    var redfx = (qeeme.width / 2) - (imageObj.width / 2);
+    var redfx = (qeeme.width / 2) - (imageMap.width / 2);
     var redfy = 420 - 5;
 
     var posx = r + redfx;
@@ -950,7 +1047,7 @@ var loadCanvas = function() {
     context.clip();
 
     //context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
-    context.drawImage(imageObj, redfx, redfy);
+    context.drawImage(imageMap, redfx, redfy);
     //
     // // Undo the clipping
     context.restore();
@@ -989,7 +1086,7 @@ var loadCanvas = function() {
     context.textBaseline = 'top';
     context.fillStyle = '#ffffff';
     var dateOfBirth,
-        year, month, day, age;
+      year, month, day, age;
     if (!!person.date_of_birth) {
       var dateOfBirthArr = person.date_of_birth.split('-');
       year = dateOfBirthArr[0];
@@ -999,7 +1096,8 @@ var loadCanvas = function() {
       age = (new Date()).getFullYear() - year;
     }
     if (!!dateOfBirth) {
-        context.fillText(dateOfBirth + ' (age ' + age + ')', qeeme.width - 131, 83);
+      context.fillText(dateOfBirth + ' (age ' + age + ')', qeeme.width - 131,
+        83);
     }
 
     // icon
@@ -1064,18 +1162,22 @@ var loadCanvas = function() {
     maxwidth = 100,
     maxheight = 100;
 
-
   headerImage.onload = function() {
-    context.drawImage(headerImage, 0, headerImage.width / 2, headerImage.width,
-      100, 0, 0, headerImage.width, 100);
-    context.globalAlpha = 0.75;
-    context.fillStyle = '#000';
-    context.fillRect(0, 0, headerImage.width, 100);
-    context.globalAlpha = 1;
-    personImage.src = getImageUrl(person.images[0].mid, maxwidth);
+    if (headerImage.width < qeeme.width && qeeme.width <= 1920) {
+      headerImage.src = 'http://img.wallpaperlist.com/uploads/wallpaper/files/woo/wood-floor-wallpaper-5311f9bde1bf8.jpg';
+    } else {
+      context.drawImage(headerImage, 0, headerImage.width / 2, headerImage.width,
+        100, 0, 0, headerImage.width, 100);
+      context.globalAlpha = 0.65;
+      context.fillStyle = '#000';
+      context.fillRect(0, 0, headerImage.width, 100);
+      context.globalAlpha = 1;
+      personImage.src = getImageUrl(person.images[0].mid, maxwidth);
+    }
   };
-  if (!!person.images && person.images.length > 0)
-  headerImage.src = getImageUrl(person.images[0].mid, qeeme.width);
+  if (!!person.images && person.images.length > 0) {
+    headerImage.src = getImageUrl(person.images[0].mid, qeeme.width);
+  }
 };
 var orientation2;
 if (window.innerHeight > window.innerWidth) {
