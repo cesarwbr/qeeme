@@ -1,247 +1,644 @@
 var loadCanvas = function() {
-  var person1 = {
-    name: 'Barack Obama',
-    notable: 'US President',
-    properties: {
-      image: '/m/059x99z',
-      age: 31,
-      dateOfBirth: '27 August 1983',
-      placeOfBirth: {
-        name: 'Honolulu',
-        map: 'http://maps.google.com/',
-        type: 'map'
+  var person0 = {
+    "nationality": ["United States of America"],
+    "twitter": [{
+      "namespace": "/authority/twitter",
+      "value": "BarackObama"
+    }],
+    "social_presence": [],
+    "date_of_birth": "1961-08-04",
+    "profession": ["Politician", "Lawyer", "Writer", "Author",
+      "Law professor"
+    ],
+    "education": [{
+      "degree": {
+        "name": "Bachelor of Arts"
       },
-      nationality: 'American',
-      family: {
-        parents: [{
-          name: 'Barack Obama, Sr.',
-          mid: '/m/sdfew23',
-          image: '/m/059x99z',
-          gender: 'male'
-        }, {
-          name: 'Ann Dunham',
-          mid: '/m/sdfew23',
-          image: '/m/059y4q_',
-          gender: 'female'
+      "institution": {
+        "geolocation": [{
+          "latitude": 40.8075,
+          "longitude": -73.961944
         }],
-        children: [{
-          name: 'Natasha Obama',
-          mid: '/m/sdfew23',
-          image: '/m/0cqb0v1',
-          gender: 'female'
-        }, {
-          name: 'Malia Ann Obama',
-          mid: '/m/sdfew23',
-          gender: 'female'
-        }, {
-          name: 'John da Silva',
-          mid: '/m/05m3q8j',
-          image: '/m/05m3q8j',
-          gender: 'male'
-        }]
-      },
-      education: {
-        name: 'School name',
-        map: 'http://maps.google.com',
-        type: 'map'
-      },
-      profession: 'US President',
-      living_in: {
-        name: 'Washington, US',
-        map: 'http://maps.google.com',
-        type: 'map'
+        "name": "Columbia University"
       }
+    }, {
+      "degree": {
+        "name": "Juris Doctor"
+      },
+      "institution": {
+        "geolocation": [{
+          "latitude": 42.378056,
+          "longitude": -71.118611
+        }],
+        "name": "Harvard Law School"
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "geolocation": [{
+          "latitude": 21.302778,
+          "longitude": -157.830556
+        }],
+        "name": "Punahou School"
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "geolocation": [{
+          "latitude": 34.127131,
+          "longitude": -118.210879
+        }],
+        "name": "Occidental College"
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "geolocation": [],
+        "name": "Noelani Elementary School"
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "geolocation": [],
+        "name": "St. Francis of Assisi Catholic School"
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "geolocation": [{
+          "latitude": -6.198694,
+          "longitude": 106.828984
+        }],
+        "name": "State Elementary School Menteng 01"
+      }
+    }],
+    "gender": "Male",
+    "date_of_death": null,
+    "name": "Barack Obama",
+    "parents": [{
+      "gender": "Male",
+      "name": "Barack Obama, Sr.",
+      "images": [{
+        "mid": "/m/042syxv"
+      }],
+      "mid": "/m/03qccxj"
+    }, {
+      "gender": "Female",
+      "name": "Ann Dunham",
+      "images": [{
+        "mid": "/m/059y4q_"
+      }],
+      "mid": "/m/03hfxq_"
+    }],
+    "place_of_birth": {
+      "geolocation": {
+        "latitude": 21.3,
+        "longitude": -157.816667
+      },
+      "name": "Honolulu"
+    },
+    "images": [{
+      "mid": "/m/02nqg_h"
+    }, {
+      "mid": "/m/04jrbw0"
+    }, {
+      "mid": "/m/059x99z"
+    }],
+    "mid": "/m/02mjmr",
+    "website": ["http://www.barackobama.com/"],
+    "gplus": [{
+      "namespace": "/authority/google/google_plus",
+      "value": "110031535020051778989"
+    }],
+    "children": [{
+      "gender": "Female",
+      "name": "Natasha Obama",
+      "images": [],
+      "mid": "/m/02nqgyw"
+    }, {
+      "gender": "Female",
+      "name": "Malia Ann Obama",
+      "images": [],
+      "mid": "/m/0gh6dh1"
+    }],
+    "facebook": [{
+      "namespace": "/authority/facebook",
+      "value": "barackobama"
+    }],
+    "notable": {
+      "text": "US President",
+      "lang": "en",
+      "id": "/government/us_president",
+      "name": "US President"
+    }
+  };
+
+  var person1 = {
+    "gender": "Male",
+    "date_of_death": "2009-06-25",
+    "images": [{
+      "mid": "/m/044w4g0"
+    }, {
+      "mid": "/m/05v8b2r"
+    }, {
+      "mid": "/m/0jsgn0_"
+    }],
+    "name": "Michael Jackson",
+    "children": [{
+      "images": [{
+        "mid": "/m/0654b8h"
+      }],
+      "gender": "Female",
+      "mid": "/m/0598rm4",
+      "name": "Paris-Michael Katherine Jackson"
+    }, {
+      "images": [{
+        "mid": "/m/065qbz2"
+      }],
+      "gender": "Male",
+      "mid": "/m/065qbyj",
+      "name": "Prince Michael Jackson II"
+    }, {
+      "images": [{
+        "mid": "/m/0654b5j"
+      }],
+      "gender": "Male",
+      "mid": "/m/0598rmb",
+      "name": "Michael Joseph Jackson, Jr."
+    }],
+    "profession": ["Record producer", "Businessperson", "Actor",
+      "Singer-songwriter", "Musician", "Choreographer", "Film Producer",
+      "Entertainer", "Dancer", "Film Score Composer", "Music Arranger",
+      "Voice Actor", "Screenwriter", "Film director", "Music artist"
+    ],
+    "twitter": [{
+      "namespace": "/authority/twitter",
+      "value": "michaeljackson"
+    }],
+    "date_of_birth": "1958-08-29",
+    "social_presence": ["http://www.imeem.com/michaeljackson",
+      "http://www.last.fm/music/Michael+Jackson"
+    ],
+    "education": [{
+      "degree": null,
+      "institution": {
+        "geolocation": [],
+        "name": "Montclair College Preparatory School"
+      }
+    }],
+    "gplus": [],
+    "facebook": [{
+      "namespace": "/authority/facebook",
+      "value": "michaeljackson"
+    }],
+    "parents": [{
+      "images": [{
+        "mid": "/m/0654b6n"
+      }],
+      "gender": "Female",
+      "mid": "/m/0524pr",
+      "name": "Katherine Jackson"
+    }, {
+      "images": [{
+        "mid": "/m/0654b4n"
+      }],
+      "gender": "Male",
+      "mid": "/m/051y29",
+      "name": "Joe Jackson"
+    }],
+    "place_of_birth": {
+      "geolocation": {
+        "latitude": 41.595556,
+        "longitude": -87.345278
+      },
+      "name": "Gary"
+    },
+    "mid": "/m/09889g",
+    "website": ["http://www.michaeljackson.com/",
+      "http://www.sonymusic.co.jp/Music/International/Arch/ES/MichaelJackson/"
+    ],
+    "nationality": ["United States of America"],
+    "notable": {
+      "text": "Musical Artist",
+      "lang": "en",
+      "id": "/music/artist",
+      "name": "Musical Artist"
     }
   };
 
   var person2 = {
-    name: 'Katy Perry',
-    notable: 'Dance-pop Artist',
-    properties: {
-      image: '/m/05mcv9y',
-      age: 31,
-      dateOfBirth: '08/27/1983',
-      placeOfBirth: {
-        name: 'Honolulu',
-        map: 'http://maps.google.com/',
-        type: 'map'
+    "mid": "/m/0b3kn4",
+    "place_of_birth": {
+      "geolocation": {
+        "latitude": 43.7034,
+        "longitude": 7.2663
       },
-      nationality: 'American',
-      family: {
-        parents: [{
-          name: 'Father',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'male'
-        }, {
-          name: 'Mother',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }],
-        children: [{
-          name: 'Child 1',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }]
-      },
-      education: {
-        name: 'School name',
-        map: 'http://maps.google.com',
-        type: 'map'
-      },
-      profession: 'US President',
-      living_in: {
-        name: 'United States',
-        map: 'http://maps.google.com',
-        type: 'map'
-      }
+      "name": "Nice"
+    },
+    "parents": [{
+      "mid": "/m/0ngn0q3",
+      "gender": "Male",
+      "name": "Michel Dadouche",
+      "images": []
+    }, {
+      "mid": "/m/0ngn0qb",
+      "gender": "Female",
+      "name": "Christine Bartoli",
+      "images": []
+    }],
+    "images": [{
+      "mid": "/m/042cyh2"
+    }],
+    "date_of_death": null,
+    "facebook": [{
+      "namespace": "/authority/facebook",
+      "value": "JeniferOfficiel"
+    }],
+    "name": "Jenifer",
+    "social_presence": ["http://www.dailymotion.com/jenifer",
+      "http://www.last.fm/music/Jenifer"
+    ],
+    "children": [{
+      "mid": "/m/0v__tqr",
+      "gender": "Male",
+      "name": "Aaron Nouchy",
+      "images": []
+    }],
+    "education": [],
+    "profession": ["Singer", "Songwriter", "Actor"],
+    "website": ["http://www.jeniferofficiel.com/"],
+    "twitter": [{
+      "namespace": "/authority/twitter",
+      "value": "jeniferofficiel"
+    }],
+    "nationality": ["France"],
+    "gplus": [],
+    "gender": "Female",
+    "date_of_birth": "1982-11-15",
+    "notable": {
+      "text": "Musical Artist",
+      "lang": "en",
+      "id": "/music/artist",
+      "name": "Musical Artist"
     }
   };
 
   var person3 = {
-    name: 'Jennifer Aniston',
-    notable: 'Actor',
-    properties: {
-      image: '/m/052x6yr',
-      age: 31,
-      dateOfBirth: '08/27/1983',
-      placeOfBirth: {
-        name: 'Honolulu',
-        map: 'http://maps.google.com/',
-        type: 'map'
-      },
-      nationality: 'American',
-      family: {
-        parents: [{
-          name: 'Father',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'male'
-        }, {
-          name: 'Mother',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }],
-        children: [{
-          name: 'Child 1',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }]
-      },
-      education: {
-        name: 'School name',
-        map: 'http://maps.google.com',
-        type: 'map'
-      },
-      profession: 'US President',
-      living_in: {
-        name: 'United States',
-        map: 'http://maps.google.com',
-        type: 'map'
+    "twitter": [],
+    "date_of_birth": "1889-04-20",
+    "facebook": [],
+    "gplus": [],
+    "nationality": ["German Reich", "Austria"],
+    "children": [{
+      "name": "Jean-Marie Loret",
+      "images": [],
+      "gender": "Male",
+      "mid": "/m/0j44_4b"
+    }],
+    "images": [{
+      "mid": "/m/041hk2s"
+    }],
+    "profession": ["Politician", "Writer", "Artist", "Soldier",
+      "Visual Artist"
+    ],
+    "parents": [{
+      "name": "Alois Hitler",
+      "images": [{
+        "mid": "/m/02c_prm"
+      }, {
+        "mid": "/m/03t20bn"
+      }],
+      "gender": "Male",
+      "mid": "/m/02p0d7"
+    }, {
+      "name": "Klara Hitler",
+      "images": [{
+        "mid": "/m/03t98hk"
+      }, {
+        "mid": "/m/0bcr1wk"
+      }],
+      "gender": "Female",
+      "mid": "/m/0321wy"
+    }],
+    "date_of_death": "1945-04-30",
+    "education": [{
+      "degree": null,
+      "institution": {
+        "geolocation": [],
+        "name": "BRG Steyr"
       }
+    }, {
+      "degree": null,
+      "institution": {
+        "geolocation": [],
+        "name": "Bundesrealgymnasium Linz"
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "geolocation": [],
+        "name": "Volksschule Lambach"
+      }
+    }],
+    "mid": "/m/07_m9_",
+    "website": [],
+    "place_of_birth": {
+      "geolocation": {
+        "longitude": 13.035,
+        "latitude": 48.258333
+      },
+      "name": "Braunau am Inn"
+    },
+    "social_presence": [],
+    "gender": "Male",
+    "name": "Adolf Hitler",
+    "notable": {
+      "text": "Military Commander",
+      "lang": "en",
+      "id": "/military/military_commander",
+      "name": "Military Commander"
     }
   };
 
   var person4 = {
-    name: 'Beyoncé Knowles',
-    notable: 'Dance-pop Artist',
-    properties: {
-      image: '/m/0c5l3sf',
-      age: 31,
-      dateOfBirth: '08/27/1983',
-      placeOfBirth: {
-        name: 'Honolulu',
-        map: 'http://maps.google.com/',
-        type: 'map'
-      },
-      nationality: 'American',
-      family: {
-        parents: [{
-          name: 'Father',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'male'
-        }, {
-          name: 'Mother',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }],
-        children: [{
-          name: 'Child 1',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }]
-      },
-      education: {
-        name: 'School name',
-        map: 'http://maps.google.com',
-        type: 'map'
-      },
-      profession: 'US President',
-      living_in: {
-        name: 'United States',
-        map: 'http://maps.google.com',
-        type: 'map'
+    "social_presence": [],
+    "children": [],
+    "name": "Marina Silva",
+    "profession": ["Environmentalist", "Politician", "Pedagogy", "Historian"],
+    "images": [{
+      "mid": "/m/04g6qq9"
+    }],
+    "education": [],
+    "parents": [],
+    "website": [],
+    "gplus": [],
+    "date_of_death": null,
+    "mid": "/m/047dbx9",
+    "place_of_birth": {
+      "name": "Rio Branco, Acre",
+      "geolocation": {
+        "longitude": -67.81,
+        "latitude": -9.974722
       }
+    },
+    "gender": "Female",
+    "nationality": ["Brazil"],
+    "twitter": [],
+    "date_of_birth": "1958-02-08",
+    "facebook": [],
+    "notable": {
+      "text": "Politician",
+      "lang": "en",
+      "id": "/government/politician",
+      "name": "Politician"
     }
   };
 
   var person5 = {
-    name: 'Jay-Z',
-    notable: 'Gangsta rap Artist',
-    properties: {
-      image: '/m/05m3q8j',
-      age: 31,
-      dateOfBirth: '08/27/1983',
-      placeOfBirth: {
-        name: 'Honolulu',
-        map: 'http://maps.google.com/',
-        type: 'map'
-      },
-      nationality: 'American',
-      family: {
-        parents: [{
-          name: 'Father',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'male'
-        }, {
-          name: 'Mother',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }],
-        children: [{
-          name: 'Child 1',
-          mid: '/m/sdfew23',
-          image: '/m/234233',
-          gender: 'female'
-        }]
-      },
-      education: {
-        name: 'School name',
-        map: 'http://maps.google.com',
-        type: 'map'
-      },
-      profession: 'US President',
-      living_in: {
-        name: 'United States',
-        map: 'http://maps.google.com',
-        type: 'map'
+    "date_of_death": null,
+    "mid": "/m/01jy51",
+    "gplus": [],
+    "website": ["http://theamydumas.com/"],
+    "gender": "Female",
+    "children": [],
+    "name": "Amy Dumas",
+    "images": [{
+      "mid": "/m/02c90s5"
+    }, {
+      "mid": "/m/09hcw2h"
+    }, {
+      "mid": "/m/0gzw7g0"
+    }],
+    "nationality": ["United States of America"],
+    "place_of_birth": {
+      "name": "Fort Lauderdale",
+      "geolocation": {
+        "longitude": -80.15,
+        "latitude": 26.133333
       }
+    },
+    "date_of_birth": "1975-04-14",
+    "profession": ["Wrestler", "Singer", "Model"],
+    "education": [{
+      "degree": null,
+      "institution": {
+        "name": "Georgia State University",
+        "geolocation": [{
+          "longitude": -84.38611,
+          "latitude": 33.75278
+        }]
+      }
+    }],
+    "facebook": [],
+    "social_presence": ["https://twitter.com/AmyDumas",
+      "https://www.facebook.com/fakepagessuckamydumas"
+    ],
+    "twitter": [],
+    "parents": [],
+    "notable": {
+      "text": "TV Personality",
+      "lang": "en",
+      "id": "/tv/tv_personality",
+      "name": "TV Personality"
     }
   };
 
-  var person = person1;
+  var person6 = {
+    "profession": ["Singer", "Singer-songwriter", "Musician", "Artist",
+      "Drummer", "Guitarist", "Keyboard Player", "Pianist", "Social activist",
+      "Poet", "Entrepreneur", "Record producer", "Composer", "Film Producer",
+      "Businessperson", "Peace activist", "Bassist", "Songwriter",
+      "Film Score Composer", "Multi-instrumentalist", "Television producer",
+      "Screenwriter", "Television Director", "Actor", "Music artist"
+    ],
+    "name": "Paul McCartney",
+    "nationality": ["England"],
+    "facebook": [{
+      "value": "PaulMcCartney",
+      "namespace": "/authority/facebook"
+    }, {
+      "value": "PercyThrillsThrillington",
+      "namespace": "/authority/facebook"
+    }],
+    "place_of_birth": {
+      "geolocation": {
+        "longitude": -2.955,
+        "latitude": 53.443
+      },
+      "name": "Walton, Liverpool"
+    },
+    "date_of_birth": "1942-06-18",
+    "website": ["http://www.paulmccartney.com/",
+      "http://www.whoispercythrillington.com/"
+    ],
+    "twitter": [{
+      "value": "PaulMcCartney",
+      "namespace": "/authority/twitter"
+    }, {
+      "value": "P_Thrillington",
+      "namespace": "/authority/twitter"
+    }],
+    "education": [{
+      "institution": {
+        "name": "Liverpool Institute High School for Boys",
+        "geolocation": [{
+          "longitude": -2.972306,
+          "latitude": 53.399556
+        }]
+      },
+      "degree": null
+    }, {
+      "institution": {
+        "name": "Joseph Williams Junior School",
+        "geolocation": []
+      },
+      "degree": null
+    }, {
+      "institution": {
+        "name": "Stockton Wood Road Primary School",
+        "geolocation": []
+      },
+      "degree": null
+    }],
+    "date_of_death": null,
+    "gplus": [{
+      "value": "102029739889617898112",
+      "namespace": "/authority/google/google_plus"
+    }],
+    "gender": "Male",
+    "parents": [{
+      "name": "James McCartney",
+      "gender": "Male",
+      "images": [],
+      "mid": "/m/02k9tpb"
+    }, {
+      "name": "Mary McCartney",
+      "gender": "Female",
+      "images": [],
+      "mid": "/m/02k9tpk"
+    }],
+    "children": [{
+      "name": "Mary McCartney",
+      "gender": "Female",
+      "images": [],
+      "mid": "/m/0bkgvn"
+    }, {
+      "name": "Stella McCartney",
+      "gender": "Female",
+      "images": [{
+        "mid": "/m/063gmb9"
+      }, {
+        "mid": "/m/0h4hd2c"
+      }],
+      "mid": "/m/03j437"
+    }, {
+      "name": "James McCartney",
+      "gender": "Male",
+      "images": [{
+        "mid": "/m/09hnstk"
+      }],
+      "mid": "/m/0drhp3"
+    }, {
+      "name": "Beatrice McCartney",
+      "gender": "Female",
+      "images": [],
+      "mid": "/m/09pm1zj"
+    }, {
+      "name": "Heather McCartney",
+      "gender": "Female",
+      "images": [],
+      "mid": "/m/05bm10"
+    }],
+    "social_presence": ["http://www.last.fm/music/Paul+McCartney"],
+    "mid": "/m/03j24kf",
+    "images": [{
+      "mid": "/m/02bh9y4"
+    }, {
+      "mid": "/m/05y9527"
+    }, {
+      "mid": "/m/05y95d2"
+    }],
+    "notable": {
+      "text": "Musical Artist",
+      "lang": "en",
+      "id": "/music/artist",
+      "name": "Musical Artist"
+    }
+  };
+
+  var person7 = {
+    "date_of_death": null,
+    "mid": "/m/0j6cj",
+    "website": ["http://www.satriani.com/"],
+    "gender": "Male",
+    "gplus": [{
+      "namespace": "/authority/google/google_plus",
+      "value": "107940613488592745009"
+    }],
+    "children": [{
+      "name": "Zachariah Satriani",
+      "images": [],
+      "mid": "/m/0n4m6sw",
+      "gender": "Male"
+    }],
+    "name": "Joe Satriani",
+    "twitter": [],
+    "images": [{
+      "mid": "/m/0292x5f"
+    }, {
+      "mid": "/m/03tbk3c"
+    }, {
+      "mid": "/m/0ccl8gs"
+    }],
+    "parents": [],
+    "facebook": [{
+      "namespace": "/authority/facebook",
+      "value": "joesatriani"
+    }],
+    "place_of_birth": {
+      "name": "Westbury",
+      "geolocation": {
+        "longitude": -73.588056,
+        "latitude": 40.758889
+      }
+    },
+    "date_of_birth": "1956-07-15",
+    "profession": ["Guitarist", "Songwriter", "Musician", "Composer",
+      "Record producer", "Multi-instrumentalist", "Actor"
+    ],
+    "education": [{
+      "degree": null,
+      "institution": {
+        "name": "Five Towns College",
+        "geolocation": [{
+          "longitude": -73.369256,
+          "latitude": 40.794789
+        }]
+      }
+    }, {
+      "degree": null,
+      "institution": {
+        "name": "Berklee College of Music",
+        "geolocation": [{
+          "longitude": -71.086944,
+          "latitude": 42.346389
+        }]
+      }
+    }],
+    "social_presence": ["http://www.last.fm/music/Joe+Satriani"],
+    "nationality": ["United States of America"],
+    "notable": {
+      "text": "Musical Artist",
+      "lang": "en",
+      "id": "/music/artist",
+      "name": "Musical Artist"
+    }
+  };
+
+  var person = person7;
   var qeeme = document.getElementById('qeeme');
   qeeme.width = window.innerWidth;
-  qeeme.height = window.innerHeight;
+  qeeme.height = 745;
 
   var context = qeeme.getContext('2d');
 
@@ -301,34 +698,31 @@ var loadCanvas = function() {
   document.querySelector('body').style.background = color.bg;
   document.querySelector('header h1').innerHTML = person.name;
 
+  var addSection = function(icon, position) {
+    // icon
+    context.font = '35px qeeme';
+    context.textBaseline = 'top';
+    context.fillStyle = color.icon;
+    context.fillText(icon, (qeeme.width / 2) - 17, position.y - 15);
 
-  // icon
-  context.font = '35px qeeme';
-  context.textBaseline = 'top';
-  context.fillStyle = color.icon;
-  context.fillText('a', (qeeme.width / 2) - 17, 185);
+    // icon circle
+    context.beginPath();
+    context.arc((qeeme.width / 2), position.y, 25, 0, Math.PI * 2, false);
+    context.closePath();
+    context.strokeStyle = color.circleBg;
+    context.lineWidth = 5;
+    context.stroke();
+  };
 
-  // icon circle
-  context.beginPath();
-  context.arc((qeeme.width / 2), 200, 25, 0, Math.PI * 2, false);
-  context.closePath();
-  context.strokeStyle = color.circleBg;
-  context.lineWidth = 5;
-  context.stroke();
+  // family
+  addSection('a', {x: (qeeme.width / 2), y: 200});
 
-  // icon 2
-  context.font = '35px qeeme';
-  context.textBaseline = 'top';
-  context.fillStyle = color.icon;
-  context.fillText('e', (qeeme.width / 2) - 17, 355);
+  // place of bird
+  addSection('e', {x: (qeeme.width / 2), y: 370});
 
-  // icon circle
-  context.beginPath();
-  context.arc((qeeme.width / 2), 370, 25, 0, Math.PI * 2, false);
-  context.closePath();
-  context.strokeStyle = color.circleBg;
-  context.lineWidth = 5;
-  context.stroke();
+  // profession
+  addSection('p', {x: (qeeme.width / 2), y: 650});
+
 
 
   var loadFamilyImage = function(imageId, position) {
@@ -371,11 +765,11 @@ var loadCanvas = function() {
   var addChild = function(child, i) {
     var firstName = child.name.split(' ')[0];
     var left = (qeeme.width / 2) - 90 - 65 * i;
-    var iconColor = color[child.gender];
-    var iconLetter = child.gender === 'male' ? 'o' : 'n';
+    var iconColor = color[child.gender.toLowerCase()];
+    var iconLetter = child.gender.toLowerCase() === 'male' ? 'o' : 'n';
 
-    if ( !! child.image) {
-      loadFamilyImage(child.image, {
+    if ( !! child.images && child.images.length > 0) {
+      loadFamilyImage(child.images[0].mid, {
         x: left - 11,
         y: 237
       });
@@ -405,8 +799,8 @@ var loadCanvas = function() {
 
   var i;
 
-  for (i = 0; i < person.properties.family.children.length; i++) {
-    addChild(person.properties.family.children[i], i);
+  for (i = 0; i < person.children.length; i++) {
+    addChild(person.children[i], i);
   }
 
 
@@ -414,11 +808,11 @@ var loadCanvas = function() {
   var addParent = function(parent, i) {
     var firstName = parent.name.split(' ')[0];
     var left = (qeeme.width / 2) + 90 + 65 * i;
-    var iconColor = color[parent.gender];
-    var iconLetter = parent.gender === 'male' ? 'j' : 'i';
+    var iconColor = color[parent.gender.toLowerCase()];
+    var iconLetter = parent.gender.toLowerCase() === 'male' ? 'j' : 'i';
 
-    if ( !! parent.image) {
-      loadFamilyImage(parent.image, {
+    if ( !! parent.images && parent.images.length > 0) {
+      loadFamilyImage(parent.images[0].mid, {
         x: left - 11,
         y: 237
       });
@@ -446,18 +840,21 @@ var loadCanvas = function() {
       2), 275);
   };
 
-  for (i = 0; i < person.properties.family.parents.length; i++) {
-    addParent(person.properties.family.parents[i], i);
+  for (i = 0; i < person.parents.length; i++) {
+    addParent(person.parents[i], i);
   }
 
   // Map
+  var latitude = person.place_of_birth.geolocation.latitude;
+  var longitude = person.place_of_birth.geolocation.longitude;
+  var mapWidth = qeeme.width;
   var google_tile =
-    'http://maps.google.com/maps/api/staticmap?sensor=false&center=21.3,-157.816667&zoom=8&size=300x150';
+    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' + latitude +',' + longitude + '&zoom=8&size=' + mapWidth + 'x170';
   var imageObj = new Image();
   imageObj.src = google_tile;
 
   imageObj.onload = function() {
-    context.drawImage(imageObj, (qeeme.width / 2) - 150, 420);
+    context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
   };
 
   var personImage = new Image();
@@ -483,7 +880,7 @@ var loadCanvas = function() {
     context.font = 'bold 12px Roboto';
     context.textBaseline = 'top';
     context.fillStyle = color.subtitle;
-    context.fillText(person.notable, 100, 130);
+    context.fillText(person.notable.text, 100, 130);
 
 
     // birth / age
@@ -491,8 +888,7 @@ var loadCanvas = function() {
     context.textBaseline = 'top';
     context.fillStyle = '#ffffff';
 
-    context.fillText(person.properties.dateOfBirth + ' (age ' + person.properties
-      .age + ')', qeeme.width - 131, 83);
+    context.fillText(person.date_of_birth + ' (age ' + 30 + ')', qeeme.width - 131, 83);
     // icon
     context.font = '12px qeeme';
     context.textBaseline = 'top';
@@ -504,7 +900,7 @@ var loadCanvas = function() {
     context.textBaseline = 'top';
     context.fillStyle = '#ffffff';
 
-    context.fillText(person.properties.living_in.name, qeeme.width - 131,
+    context.fillText(person.nationality[0], qeeme.width - 131,
       63);
     // icon
     context.font = '14px qeeme';
@@ -563,10 +959,10 @@ var loadCanvas = function() {
     context.fillStyle = '#000';
     context.fillRect(0, 0, headerImage.width, 100);
     context.globalAlpha = 1;
-    personImage.src = getImageUrl(person.properties.image, maxwidth);
+    personImage.src = getImageUrl(person.images[0].mid, maxwidth);
   };
-
-  headerImage.src = getImageUrl(person.properties.image, qeeme.width);
+  if (!!person.images && person.images.length > 0)
+  headerImage.src = getImageUrl(person.images[0].mid, qeeme.width);
 };
 var orientation2;
 if (window.innerHeight > window.innerWidth) {
