@@ -1,16 +1,32 @@
 var utils = require('./utils').Utils();
-var freebase = require('freebase');
-var props = require('./map').props;
-var mql_person = require('./mql_person.js').person;
-var redis = require('redis');
-var client = redis.createClient();
+	logger = require('./logger').Logger(),
+	freebase = require('freebase'),
+	props = require('./map').props,
+	mql_person = require('./mql_person.js').person,
+	redis = require('redis'),
+	client = redis.createClient();
 
+/**
+ * A module that fetch information about specific mid
+ * @exports search
+ * @exports toQeeme
+ * @author  Rafael Gomes
+ * @author  Cesar William
+ * 
+ * @todo  Error handlers
+ */
 
 client.on("error", function(err) {
-	//TODO Error Handler
-	console.log("Error: " + err);
+	logger.error("[REDIS] Error: " + err);
 });
 
+/**
+ * Get mid information from freebase public API
+ * @param  {string} mid
+ * @param  {string} opt
+ * @callback callBack
+ * @todo  Other options music, movies ... etc
+ */
 function getFromFreebase(mid, opt, callBack) {
 	var url = utils.getBaseUrl();
 	switch (opt) {
@@ -32,22 +48,36 @@ function getFromFreebase(mid, opt, callBack) {
 
 }
 
+/** 
+ * Search information from specific mid
+ * @param  {string} mid
+ * @param  {string} opt
+ * @callback callBack
+ */
 exports.search = function search(mid, opt, callBack) {
-
 	client.get('mid:' + mid, function(err, result) {
 		if (err || !result) {
-			//Get from freebase
+			if(err) {
+				logger.error('Error getting mid: ' + mid + ' Description: ' + err);
+			}
+			logger.info("Freebase call mid: " + mid);
 			getFromFreebase(mid, opt, function(data) {
 				client.set('mid:' + mid, JSON.stringify(data));
 				callBack(data);
 			});
 		} else {
+			logger.info("Local cache call mid: " + mid);
 			callBack(JSON.parse(result));
 		}
 	});
 
 };
 
+/**
+ * Convert freebase json to qeeme format
+ * @param  {object} data
+ * @return {object}
+ */
 exports.toQeeme = function toQeeme(data) {
 	data = JSON.stringify(data);
 	for (var item in props) {
