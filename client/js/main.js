@@ -770,10 +770,75 @@ var loadCanvas = function() {
     }
   };
 
-  var person = person9;
+  var person10 = {
+    "images": [{
+      "mid": "/m/03qsz91"
+    }],
+    "name": "Kurt Cobain",
+    "twitter": [],
+    "website": [],
+    "gender": "Male",
+    "profession": ["Singer", "Musician", "Songwriter", "Guitarist",
+      "Artist",
+      "Visual Artist"
+    ],
+    "mid": "/m/0484q",
+    "nationality": ["United States of America"],
+    "children": [{
+      "mid": "/m/027djm",
+      "images": [{
+        "mid": "/m/063g8d6"
+      }, {
+        "mid": "/m/07x_32_"
+      }],
+      "gender": "Female",
+      "name": "Frances Bean Cobain"
+    }],
+    "date_of_death": "1994-04-05",
+    "gplus": [],
+    "facebook": [],
+    "parents": [{
+      "mid": "/m/059x_9g",
+      "images": [],
+      "gender": "Male",
+      "name": "Donald Cobain"
+    }, {
+      "mid": "/m/059x_9n",
+      "images": [],
+      "gender": "Female",
+      "name": "Wendy Cobain"
+    }],
+    "place_of_birth": {
+      "name": "Aberdeen",
+      "geolocation": {
+        "longitude": -123.818611,
+        "latitude": 46.975833
+      }
+    },
+    "education": [{
+      "institution": {
+        "name": "Aberdeen High School",
+        "geolocation": [{
+          "longitude": -123.821,
+          "latitude": 46.979259
+        }]
+      },
+      "degree": null
+    }],
+    "social_presence": [],
+    "date_of_birth": "1967-02-20",
+    "notable": {
+      "text": "Celebrity",
+      "lang": "en",
+      "id": "/celebrities/celebrity",
+      "name": "Celebrity"
+    }
+  };
+
+  var person = person10;
   var qeeme = document.getElementById('qeeme');
   qeeme.width = window.innerWidth;
-  qeeme.height = 745;
+  qeeme.height = 1285;
 
   var context = qeeme.getContext('2d');
 
@@ -833,7 +898,7 @@ var loadCanvas = function() {
   document.querySelector('body').style.background = color.bg;
   document.querySelector('header h1').innerHTML = person.name;
 
-  var addSection = function(icon, position) {
+  var addSection = function(icon, position, title) {
     // icon
     context.font = '35px qeeme';
     context.textBaseline = 'top';
@@ -847,27 +912,27 @@ var loadCanvas = function() {
     context.strokeStyle = color.circleBg;
     context.lineWidth = 5;
     context.stroke();
+
+    // title
+    if (!!title) {
+      context.font = 'bold 12px Roboto';
+      context.textBaseline = 'top';
+      context.fillStyle = color.subtitle;
+      context.fillText(title, (qeeme.width / 2) - parseInt(context.measureText(
+          title).width /
+        2), position.y + 30);
+    }
+
   };
 
-  // family
+  /***********************
+    Family
+  ************************/
+
   addSection('a', {
     x: (qeeme.width / 2),
     y: 200
-  });
-
-  // place of bird
-  addSection('e', {
-    x: (qeeme.width / 2),
-    y: 370
-  });
-
-  // profession
-  addSection('p', {
-    x: (qeeme.width / 2),
-    y: 650
-  });
-
-
+  }, 'Family');
 
   var loadFamilyImage = function(imageId, position) {
     var familyImage = new Image();
@@ -1009,6 +1074,15 @@ var loadCanvas = function() {
     addParent(person.parents[i], i);
   }
 
+
+  /***********************
+    Place of birth
+  ************************/
+  addSection('e', {
+    x: (qeeme.width / 2),
+    y: 370
+  }, 'Place of Birth');
+
   // Map place of birth
   var latitude = person.place_of_birth.geolocation.latitude;
   var longitude = person.place_of_birth.geolocation.longitude;
@@ -1035,7 +1109,7 @@ var loadCanvas = function() {
     }
 
     var redfx = (qeeme.width / 2) - (imageMap.width / 2);
-    var redfy = 420 - 5;
+    var redfy = 430 - 5;
 
     var posx = r + redfx;
     var posy = r + redfy;
@@ -1054,6 +1128,80 @@ var loadCanvas = function() {
 
     //context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
   };
+
+  // name
+  context.font = 'bold 12px Roboto';
+  context.textBaseline = 'top';
+  context.fillStyle = color.subtitle;
+  context.fillText(person.place_of_birth.name, (qeeme.width / 2) - parseInt(
+    context.measureText(
+      person.place_of_birth.name).width /
+    2), 630);
+
+  /***********************
+    Education
+  ************************/
+  addSection('k', {
+    x: (qeeme.width / 2),
+    y: 760
+  }, 'Education');
+
+  // Map place of birth
+  latitude = person.education[0].institution.geolocation[0].latitude;
+  longitude = person.education[0].institution.geolocation[0].longitude;
+  mapWidth = qeeme.width;
+  if (mapWidth > 200) {
+    mapWidth = 200;
+  }
+  google_tile =
+    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
+    latitude + ',' + longitude + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
+  imageMap = new Image();
+  imageMap.src = google_tile;
+
+  imageMap.onload = function() {
+    context.save();
+    context.beginPath();
+    var r,
+      imgWidth = imageMap.width,
+      imgHeight = imageMap.height;
+    if (imgWidth < imgHeight) {
+      r = imgWidth / 2;
+    } else {
+      r = imgHeight / 2;
+    }
+
+    var redfx = (qeeme.width / 2) - (imageMap.width / 2);
+    var redfy = 830 - 5;
+
+    var posx = r + redfx;
+    var posy = r + redfy;
+
+    //context.arc(qeeme.width / 2, qeeme.height / 2, r, 0, Math.PI * 2, false);
+    context.arc(posx, posy, r, 0, Math.PI * 2, false);
+
+    // Clip to the current path
+    context.clip();
+
+    //context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
+    context.drawImage(imageMap, redfx, redfy);
+    //
+    // // Undo the clipping
+    context.restore();
+
+    //context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
+  };
+
+  // name
+  context.font = 'bold 12px Roboto';
+  context.textBaseline = 'top';
+  context.fillStyle = color.subtitle;
+  context.fillText(person.education[0].institution.name, (qeeme.width / 2) -
+    parseInt(context.measureText(
+        person.education[0].institution.name).width /
+      2), 1030);
+
+
 
   var personImage = new Image();
 
@@ -1164,7 +1312,8 @@ var loadCanvas = function() {
 
   headerImage.onload = function() {
     if (headerImage.width < qeeme.width && qeeme.width <= 1920) {
-      headerImage.src = 'http://img.wallpaperlist.com/uploads/wallpaper/files/woo/wood-floor-wallpaper-5311f9bde1bf8.jpg';
+      headerImage.src =
+        'http://img.wallpaperlist.com/uploads/wallpaper/files/woo/wood-floor-wallpaper-5311f9bde1bf8.jpg';
     } else {
       context.drawImage(headerImage, 0, headerImage.width / 2, headerImage.width,
         100, 0, 0, headerImage.width, 100);
