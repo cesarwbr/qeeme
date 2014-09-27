@@ -848,13 +848,45 @@ var loadCanvas = function() {
   var latitude = person.place_of_birth.geolocation.latitude;
   var longitude = person.place_of_birth.geolocation.longitude;
   var mapWidth = qeeme.width;
+  if (mapWidth > 200) {
+    mapWidth = 200;
+  }
   var google_tile =
-    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' + latitude +',' + longitude + '&zoom=8&size=' + mapWidth + 'x170';
+    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' + latitude +',' + longitude + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
   var imageObj = new Image();
   imageObj.src = google_tile;
 
   imageObj.onload = function() {
-    context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
+    context.save();
+    context.beginPath();
+    var r,
+      imgWidth = imageObj.width,
+      imgHeight = imageObj.height;
+    if (imgWidth < imgHeight) {
+      r = imgWidth / 2;
+    } else {
+      r = imgHeight / 2;
+    }
+
+    var redfx = (qeeme.width / 2) - (imageObj.width / 2);
+    var redfy = 420 - 5;
+
+    var posx = r + redfx;
+    var posy = r + redfy;
+
+    //context.arc(qeeme.width / 2, qeeme.height / 2, r, 0, Math.PI * 2, false);
+    context.arc(posx, posy, r, 0, Math.PI * 2, false);
+
+    // Clip to the current path
+    context.clip();
+
+    //context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
+    context.drawImage(imageObj, redfx, redfy);
+    //
+    // // Undo the clipping
+    context.restore();
+
+    //context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
   };
 
   var personImage = new Image();
