@@ -635,7 +635,59 @@ var loadCanvas = function() {
     }
   };
 
-  var person = person7;
+  var person8 = {
+    "gplus": [],
+    "facebook": [],
+    "profession": ["Football player"],
+    "mid": "/m/026_dd6",
+    "place_of_birth": {
+      "name": "Richland",
+      "geolocation": {
+        "longitude": -119.281377,
+        "latitude": 46.279657
+      }
+    },
+    "date_of_birth": "1981-07-30",
+    "date_of_death": null,
+    "gender": "Female",
+    "nationality": ["United States of America"],
+    "website": ["http://www.ussoccer.com/teams/wnt/s/hope-solo.aspx"],
+    "education": [{
+      "institution": {
+        "name": "Richland High School",
+        "geolocation": []
+      },
+      "degree": null
+    }],
+    "name": "Hope Solo",
+    "images": [{
+      "mid": "/m/04ry_tp"
+    }, {
+      "mid": "/m/07y0g2v"
+    }],
+    "parents": [{
+      "mid": "/m/0klghz2",
+      "gender": "Male",
+      "name": "Jeffrey Solo",
+      "images": []
+    }, {
+      "mid": "/m/0z87fyk",
+      "gender": null,
+      "name": "Judy Solo",
+      "images": []
+    }],
+    "children": [],
+    "social_presence": [],
+    "twitter": [],
+    "notable": {
+      "text": "Olympic athlete",
+      "lang": "en",
+      "id": "/olympics/olympic_athlete",
+      "name": "Olympic athlete"
+    }
+  };
+
+  var person = person8;
   var qeeme = document.getElementById('qeeme');
   qeeme.width = window.innerWidth;
   qeeme.height = 745;
@@ -765,8 +817,16 @@ var loadCanvas = function() {
   var addChild = function(child, i) {
     var firstName = child.name.split(' ')[0];
     var left = (qeeme.width / 2) - 90 - 65 * i;
-    var iconColor = color[child.gender.toLowerCase()];
-    var iconLetter = child.gender.toLowerCase() === 'male' ? 'o' : 'n';
+    var iconColor,
+        iconLetter;
+
+    if (!!child.gender) {
+      iconColor = color[child.gender.toLowerCase()];
+      iconLetter = child.gender.toLowerCase() === 'male' ? 'o' : 'n';
+    } else {
+      iconColor = color.icon;
+      iconLetter = 'o';
+    }
 
     if ( !! child.images && child.images.length > 0) {
       loadFamilyImage(child.images[0].mid, {
@@ -808,8 +868,17 @@ var loadCanvas = function() {
   var addParent = function(parent, i) {
     var firstName = parent.name.split(' ')[0];
     var left = (qeeme.width / 2) + 90 + 65 * i;
-    var iconColor = color[parent.gender.toLowerCase()];
-    var iconLetter = parent.gender.toLowerCase() === 'male' ? 'j' : 'i';
+
+    var iconColor,
+        iconLetter;
+
+    if (!!parent.gender) {
+      iconColor = color[parent.gender.toLowerCase()];
+      iconLetter = parent.gender.toLowerCase() === 'male' ? 'j' : 'i';
+    } else {
+      iconColor = color.icon;
+      iconLetter = 'j';
+    }
 
     if ( !! parent.images && parent.images.length > 0) {
       loadFamilyImage(parent.images[0].mid, {
@@ -919,8 +988,20 @@ var loadCanvas = function() {
     context.font = 'bold 10px Roboto';
     context.textBaseline = 'top';
     context.fillStyle = '#ffffff';
+    var dateOfBirth,
+        year, month, day, age;
+    if (!!person.date_of_birth) {
+      var dateOfBirthArr = person.date_of_birth.split('-');
+      year = dateOfBirthArr[0];
+      month = dateOfBirthArr[1];
+      day = dateOfBirthArr[2];
+      dateOfBirth = month + '/' + day + '/' + year;
+      age = (new Date()).getFullYear() - year;
+    }
+    if (!!dateOfBirth) {
+        context.fillText(dateOfBirth + ' (age ' + age + ')', qeeme.width - 131, 83);
+    }
 
-    context.fillText(person.date_of_birth + ' (age ' + 30 + ')', qeeme.width - 131, 83);
     // icon
     context.font = '12px qeeme';
     context.textBaseline = 'top';
