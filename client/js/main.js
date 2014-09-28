@@ -835,7 +835,7 @@ var loadCanvas = function() {
     }
   };
 
-  var person = person10;
+  var person = person0;
   var qeeme = document.getElementById('qeeme');
   qeeme.width = window.innerWidth;
   qeeme.height = 1285;
@@ -899,6 +899,22 @@ var loadCanvas = function() {
   document.querySelector('header h1').innerHTML = person.name;
 
   var addSection = function(icon, position, title) {
+    // line before
+    context.beginPath();
+    context.moveTo(0, position.y);
+    context.lineTo((qeeme.width / 2) - 30, position.y);
+    context.strokeStyle = color.circleBg;
+    context.lineWidth = 1;
+    context.stroke();
+
+    // line after
+    context.beginPath();
+    context.moveTo((qeeme.width / 2) + 30, position.y);
+    context.lineTo(qeeme.width, position.y);
+    context.strokeStyle = color.circleBg;
+    context.lineWidth = 1;
+    context.stroke();
+
     // icon
     context.font = '35px qeeme';
     context.textBaseline = 'top';
@@ -977,6 +993,7 @@ var loadCanvas = function() {
   var addChild = function(child, i) {
     var firstName = child.name.split(' ')[0];
     var left = (qeeme.width / 2) - 90 - 65 * i;
+    var top = 257;
     var iconColor,
       iconLetter;
 
@@ -991,18 +1008,18 @@ var loadCanvas = function() {
     if (!child.images || child.images.length === 0 || !loadFamilyImage(
       child.images[0].mid, {
         x: left - 11,
-        y: 237
+        y: top
       })) {
       // icon
       context.font = '23px qeeme';
       context.textBaseline = 'top';
       context.fillStyle = iconColor;
-      context.fillText(iconLetter, left - 11, 237);
+      context.fillText(iconLetter, left - 11, top);
     }
 
     // icon circle
     context.beginPath();
-    context.arc(left, 250, 20, 0, Math.PI * 2, false);
+    context.arc(left, top + 13, 20, 0, Math.PI * 2, false);
     context.closePath();
     context.strokeStyle = color.circleBg;
     context.lineWidth = 4;
@@ -1014,7 +1031,7 @@ var loadCanvas = function() {
     console.log("text: " + context.measureText(firstName).width);
     context.fillText(firstName, left - parseInt(context.measureText(
         firstName).width /
-      2), 275);
+      2), top + 33);
   };
 
   var i;
@@ -1028,6 +1045,7 @@ var loadCanvas = function() {
   var addParent = function(parent, i) {
     var firstName = parent.name.split(' ')[0];
     var left = (qeeme.width / 2) + 90 + 65 * i;
+    var top = 257;
 
     var iconColor,
       iconLetter;
@@ -1043,19 +1061,19 @@ var loadCanvas = function() {
     if (!!parent.images && parent.images.length > 0) {
       loadFamilyImage(parent.images[0].mid, {
         x: left - 11,
-        y: 237
+        y: top
       });
     } else {
       // icon
       context.font = '23px qeeme';
       context.textBaseline = 'top';
       context.fillStyle = iconColor;
-      context.fillText(iconLetter, left - 11, 237);
+      context.fillText(iconLetter, left - 11, top);
     }
 
     // icon circle
     context.beginPath();
-    context.arc(left, 250, 20, 0, Math.PI * 2, false);
+    context.arc(left, top + 13, 20, 0, Math.PI * 2, false);
     context.closePath();
     context.strokeStyle = color.circleBg;
     context.lineWidth = 4;
@@ -1067,7 +1085,7 @@ var loadCanvas = function() {
     console.log("text: " + context.measureText(firstName).width);
     context.fillText(firstName, left - parseInt(context.measureText(
         firstName).width /
-      2), 275);
+      2), top + 33);
   };
 
   for (i = 0; i < person.parents.length; i++) {
@@ -1084,31 +1102,30 @@ var loadCanvas = function() {
   }, 'Place of Birth');
 
   // Map place of birth
-  var latitude = person.place_of_birth.geolocation.latitude;
-  var longitude = person.place_of_birth.geolocation.longitude;
+  var placeOfBirthLat = person.place_of_birth.geolocation.latitude;
+  var placeOfBirthLong = person.place_of_birth.geolocation.longitude;
   var mapWidth = qeeme.width;
   if (mapWidth > 200) {
     mapWidth = 200;
   }
-  var google_tile =
+  var placeOfBirthMapUrl =
     'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
-    latitude + ',' + longitude + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
-  var imageMap = new Image();
-  imageMap.src = google_tile;
+    placeOfBirthLat + ',' + placeOfBirthLong + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
+  var placeOfBirthMap = new Image();
 
-  imageMap.onload = function() {
+  placeOfBirthMap.onload = function() {
     context.save();
     context.beginPath();
     var r,
-      imgWidth = imageMap.width,
-      imgHeight = imageMap.height;
+      imgWidth = placeOfBirthMap.width,
+      imgHeight = placeOfBirthMap.height;
     if (imgWidth < imgHeight) {
       r = imgWidth / 2;
     } else {
       r = imgHeight / 2;
     }
 
-    var redfx = (qeeme.width / 2) - (imageMap.width / 2);
+    var redfx = (qeeme.width / 2) - (placeOfBirthMap.width / 2);
     var redfy = 430 - 5;
 
     var posx = r + redfx;
@@ -1121,13 +1138,14 @@ var loadCanvas = function() {
     context.clip();
 
     //context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
-    context.drawImage(imageMap, redfx, redfy);
+    context.drawImage(placeOfBirthMap, redfx, redfy);
     //
     // // Undo the clipping
     context.restore();
 
     //context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
   };
+  placeOfBirthMap.src = placeOfBirthMapUrl;
 
   // name
   context.font = 'bold 12px Roboto';
@@ -1147,31 +1165,28 @@ var loadCanvas = function() {
   }, 'Education');
 
   // Map place of birth
-  latitude = person.education[0].institution.geolocation[0].latitude;
-  longitude = person.education[0].institution.geolocation[0].longitude;
-  mapWidth = qeeme.width;
-  if (mapWidth > 200) {
-    mapWidth = 200;
-  }
-  google_tile =
-    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
-    latitude + ',' + longitude + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
-  imageMap = new Image();
-  imageMap.src = google_tile;
+  var educationLat = person.education[0].institution.geolocation[0].latitude;
+  var educationLong = person.education[0].institution.geolocation[0].longitude;
 
-  imageMap.onload = function() {
+  var educationMapUrl =
+    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
+    educationLat + ',' + educationLong + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
+  var educationMap = new Image();
+
+
+  educationMap.onload = function() {
     context.save();
     context.beginPath();
     var r,
-      imgWidth = imageMap.width,
-      imgHeight = imageMap.height;
+      imgWidth = educationMap.width,
+      imgHeight = educationMap.height;
     if (imgWidth < imgHeight) {
       r = imgWidth / 2;
     } else {
       r = imgHeight / 2;
     }
 
-    var redfx = (qeeme.width / 2) - (imageMap.width / 2);
+    var redfx = (qeeme.width / 2) - (educationMap.width / 2);
     var redfy = 830 - 5;
 
     var posx = r + redfx;
@@ -1184,13 +1199,15 @@ var loadCanvas = function() {
     context.clip();
 
     //context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
-    context.drawImage(imageMap, redfx, redfy);
+    context.drawImage(educationMap, redfx, redfy);
     //
     // // Undo the clipping
     context.restore();
 
     //context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
   };
+
+  educationMap.src = educationMapUrl;
 
   // name
   context.font = 'bold 12px Roboto';
