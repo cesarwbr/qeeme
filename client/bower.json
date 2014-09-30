@@ -1,0 +1,30 @@
+{
+  "name": "qeeme",
+  "version": "0.0.1",
+  "homepage": "https://github.com/cesarwbr/qeeme",
+  "authors": [
+    "Cesar William <cesarwbr@gmail.com>"
+  ],
+  "description": "Search engine",
+  "main": "index.html",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "search",
+    "people"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.1",
+    "handlebars": "~2.0.0"
+  }
+}
