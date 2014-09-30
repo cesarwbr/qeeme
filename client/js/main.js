@@ -944,10 +944,15 @@ var loadCanvas = function() {
   /***********************
     Family
   ************************/
+  var family = {
+    positionX: qeeme.width / 2,
+    positionY: 200,
+    imageSize: 36
+  };
 
   addSection('a', {
-    x: (qeeme.width / 2),
-    y: 200
+    x: family.positionX,
+    y: family.positionY
   }, 'Family');
 
   var loadFamilyImage = function(imageId, position) {
@@ -985,15 +990,24 @@ var loadCanvas = function() {
       context.restore();
     };
 
-    familyImage.src = getImageUrl(imageId, 36);
+    familyImage.src = getImageUrl(imageId, family.imageSize);
     return true;
   };
 
   // children
+  var childrenTotal = person.children.length;
+  if (childrenTotal > 0) {
+    context.font = 'bold 14px Roboto';
+    context.textBaseline = 'top';
+    context.fillStyle = color.title;
+    var titleChildrenX =  family.positionX - 90 - ((childrenTotal * family.imageSize) / 2) - parseInt(context.measureText('Children').width / 2);
+    context.fillText('Children', titleChildrenX, family.positionY + 10);
+  }
+
   var addChild = function(child, i) {
     var firstName = child.name.split(' ')[0];
     var left = (qeeme.width / 2) - 90 - 65 * i;
-    var top = 257;
+    var top = family.positionY + 57;
     var iconColor,
       iconLetter;
 
@@ -1031,21 +1045,29 @@ var loadCanvas = function() {
     console.log("text: " + context.measureText(firstName).width);
     context.fillText(firstName, left - parseInt(context.measureText(
         firstName).width /
-      2), top + 33);
+      2), top + 42);
   };
 
   var i;
 
-  for (i = 0; i < person.children.length; i++) {
+  for (i = 0; i < childrenTotal; i++) {
     addChild(person.children[i], i);
   }
 
 
+  var parentsTotal = person.parents.length;
+  if (parentsTotal > 0) {
+    context.font = 'bold 14px Roboto';
+    context.textBaseline = 'top';
+    context.fillStyle = color.title;
+    var titleParentX =  family.positionX + 90 + ((parentsTotal * family.imageSize) / 2) - parseInt(context.measureText('Parents').width / 2);
+    context.fillText('Parents', titleParentX, family.positionY + 10);
+  }
 
   var addParent = function(parent, i) {
     var firstName = parent.name.split(' ')[0];
     var left = (qeeme.width / 2) + 90 + 65 * i;
-    var top = 257;
+    var top = family.positionY + 57;
 
     var iconColor,
       iconLetter;
@@ -1082,10 +1104,9 @@ var loadCanvas = function() {
     context.font = 'bold 12px Roboto';
     context.textBaseline = 'top';
     context.fillStyle = color.subtitle;
-    console.log("text: " + context.measureText(firstName).width);
     context.fillText(firstName, left - parseInt(context.measureText(
         firstName).width /
-      2), top + 33);
+      2), top + 42);
   };
 
   for (i = 0; i < person.parents.length; i++) {
@@ -1096,9 +1117,13 @@ var loadCanvas = function() {
   /***********************
     Place of birth
   ************************/
+  var placeOfBirth = {
+    positionY: 370
+  };
+
   addSection('e', {
     x: (qeeme.width / 2),
-    y: 370
+    y: placeOfBirth.positionY
   }, 'Place of Birth');
 
   // Map place of birth
@@ -1110,7 +1135,8 @@ var loadCanvas = function() {
   }
   var placeOfBirthMapUrl =
     'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
-    placeOfBirthLat + ',' + placeOfBirthLong + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
+    placeOfBirthLat + ',' + placeOfBirthLong + '&zoom=8&size=' + mapWidth +
+    'x' + mapWidth;
   var placeOfBirthMap = new Image();
 
   placeOfBirthMap.onload = function() {
@@ -1126,24 +1152,19 @@ var loadCanvas = function() {
     }
 
     var redfx = (qeeme.width / 2) - (placeOfBirthMap.width / 2);
-    var redfy = 430 - 5;
+    var redfy = placeOfBirth.positionY + 65;
 
     var posx = r + redfx;
     var posy = r + redfy;
 
-    //context.arc(qeeme.width / 2, qeeme.height / 2, r, 0, Math.PI * 2, false);
     context.arc(posx, posy, r, 0, Math.PI * 2, false);
 
     // Clip to the current path
     context.clip();
-
-    //context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
     context.drawImage(placeOfBirthMap, redfx, redfy);
-    //
-    // // Undo the clipping
-    context.restore();
 
-    //context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
+    // Undo the clipping
+    context.restore();
   };
   placeOfBirthMap.src = placeOfBirthMapUrl;
 
@@ -1154,14 +1175,18 @@ var loadCanvas = function() {
   context.fillText(person.place_of_birth.name, (qeeme.width / 2) - parseInt(
     context.measureText(
       person.place_of_birth.name).width /
-    2), 630);
+    2), placeOfBirth.positionY + 270);
 
   /***********************
     Education
   ************************/
+  var education = {
+    positionY: 700
+  };
+
   addSection('k', {
     x: (qeeme.width / 2),
-    y: 760
+    y: education.positionY
   }, 'Education');
 
   // Map place of birth
@@ -1170,7 +1195,8 @@ var loadCanvas = function() {
 
   var educationMapUrl =
     'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
-    educationLat + ',' + educationLong + '&zoom=8&size=' + mapWidth + 'x' + mapWidth;
+    educationLat + ',' + educationLong + '&zoom=8&size=' + mapWidth + 'x' +
+    mapWidth;
   var educationMap = new Image();
 
 
@@ -1187,36 +1213,34 @@ var loadCanvas = function() {
     }
 
     var redfx = (qeeme.width / 2) - (educationMap.width / 2);
-    var redfy = 830 - 5;
+    var redfy = education.positionY + 65;
 
     var posx = r + redfx;
     var posy = r + redfy;
 
-    //context.arc(qeeme.width / 2, qeeme.height / 2, r, 0, Math.PI * 2, false);
     context.arc(posx, posy, r, 0, Math.PI * 2, false);
 
     // Clip to the current path
     context.clip();
-
-    //context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
     context.drawImage(educationMap, redfx, redfy);
     //
     // // Undo the clipping
     context.restore();
-
-    //context.drawImage(imageObj, (qeeme.width / 2) - (imageObj.width / 2), 420);
   };
 
   educationMap.src = educationMapUrl;
 
   // name
+  var institutionName = person.education[0].institution.name;
+  if (!!person.education[0].degree) {
+    institutionName = institutionName + ' - ' + person.education[0].degree.name;
+  }
+
   context.font = 'bold 12px Roboto';
   context.textBaseline = 'top';
   context.fillStyle = color.subtitle;
-  context.fillText(person.education[0].institution.name, (qeeme.width / 2) -
-    parseInt(context.measureText(
-        person.education[0].institution.name).width /
-      2), 1030);
+  context.fillText(institutionName, (qeeme.width / 2) - parseInt(context.measureText(
+    institutionName).width / 2), education.positionY + 270);
 
 
 
