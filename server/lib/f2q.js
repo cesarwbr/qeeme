@@ -40,10 +40,15 @@ function getFromFreebase(mid, opt, callBack) {
 	}
 	freebase.mqlread(mql_person, {}, function(result) {
 		var queryResult = result;
-		freebase.notable(mid, {}, function(n) {
-			queryResult.result[0].notable = n;
+		if (!!queryResult.result){
+			freebase.notable(mid, {}, function(n) {
+				queryResult.result[0].notable = n;
+				callBack(queryResult);
+			});
+		} else {
+			logger.error("Error to fetch data for mid: " + mid + " Message: " + result.error.message );
 			callBack(queryResult);
-		});
+		}
 	});
 
 }
@@ -58,7 +63,7 @@ exports.search = function search(mid, opt, callBack) {
 	client.get('mid:' + mid, function(err, result) {
 		if (err || !result) {
 			if(err) {
-				logger.error('Error getting mid: ' + mid + ' Description: ' + err);
+				logger.error('[REDIS] Error getting mid: ' + mid + ' Description: ' + err);
 			}
 			logger.info("Freebase call mid: " + mid);
 			getFromFreebase(mid, opt, function(data) {
@@ -66,8 +71,13 @@ exports.search = function search(mid, opt, callBack) {
 				callBack(data);
 			});
 		} else {
-			logger.info("Local cache call mid: " + mid);
-			callBack(JSON.parse(result));
+			result = JSON.parse(result);
+			if (result.error !== undefined) {
+				logger.error("Error to fetch data for mid: " + mid + " Message: " + result.error.message );
+			} else {
+				logger.info("Cache call mid: " + mid);
+			}
+			callBack(result);
 		}
 	});
 
