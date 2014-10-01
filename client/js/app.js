@@ -7,6 +7,8 @@ require.config({
   }
 });
 
-require(['views/app'], function(AppView){
-  new AppView;
-});
+var start = function() {
+  require(['views/app'], function(AppView){
+    new AppView;
+  });
+}
