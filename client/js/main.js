@@ -1,4 +1,4 @@
-var loadCanvas = function() {
+var loadCanvas = function(personServer) {
   var person0 = {
     "nationality": ["United States of America"],
     "twitter": [{
@@ -836,6 +836,11 @@ var loadCanvas = function() {
   };
 
   var person = person0;
+
+  if(personServer) {
+    person = personServer;
+  }
+
   var qeeme = document.getElementById('qeeme');
   qeeme.width = window.innerWidth;
   qeeme.height = 1285;
@@ -1190,45 +1195,50 @@ var loadCanvas = function() {
   }, 'Education');
 
   // Map place of birth
-  var educationLat = person.education[0].institution.geolocation[0].latitude;
-  var educationLong = person.education[0].institution.geolocation[0].longitude;
 
-  var educationMapUrl =
-    'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
-    educationLat + ',' + educationLong + '&zoom=8&size=' + mapWidth + 'x' +
-    mapWidth;
-  var educationMap = new Image();
+  if(person.education.length > 0 && person.education[0].institution.geolocation.length > 0) {
+    var educationLat = person.education[0].institution.geolocation[0].latitude;
+    var educationLong = person.education[0].institution.geolocation[0].longitude;
 
 
-  educationMap.onload = function() {
-    context.save();
-    context.beginPath();
-    var r,
-      imgWidth = educationMap.width,
-      imgHeight = educationMap.height;
-    if (imgWidth < imgHeight) {
-      r = imgWidth / 2;
-    } else {
-      r = imgHeight / 2;
-    }
+    var educationMapUrl =
+      'http://maps.google.com/maps/api/staticmap?sensor=false&center=' +
+      educationLat + ',' + educationLong + '&zoom=8&size=' + mapWidth + 'x' +
+      mapWidth;
 
-    var redfx = (qeeme.width / 2) - (educationMap.width / 2);
-    var redfy = education.positionY + 65;
+    var educationMap = new Image();
 
-    var posx = r + redfx;
-    var posy = r + redfy;
 
-    context.arc(posx, posy, r, 0, Math.PI * 2, false);
+    educationMap.onload = function() {
+      context.save();
+      context.beginPath();
+      var r,
+        imgWidth = educationMap.width,
+        imgHeight = educationMap.height;
+      if (imgWidth < imgHeight) {
+        r = imgWidth / 2;
+      } else {
+        r = imgHeight / 2;
+      }
 
-    // Clip to the current path
-    context.clip();
-    context.drawImage(educationMap, redfx, redfy);
-    //
-    // // Undo the clipping
-    context.restore();
-  };
+      var redfx = (qeeme.width / 2) - (educationMap.width / 2);
+      var redfy = education.positionY + 65;
 
-  educationMap.src = educationMapUrl;
+      var posx = r + redfx;
+      var posy = r + redfy;
+
+      context.arc(posx, posy, r, 0, Math.PI * 2, false);
+
+      // Clip to the current path
+      context.clip();
+      context.drawImage(educationMap, redfx, redfy);
+      //
+      // // Undo the clipping
+      context.restore();
+    };
+
+    educationMap.src = educationMapUrl;
+  }
 
   // name
   var institutionName = person.education[0].institution.name;
