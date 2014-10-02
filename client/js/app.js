@@ -3,12 +3,12 @@ require.config({
     'jquery': '../libs/jquery/dist/jquery',
     'underscore': '../libs/underscore/underscore',
     'backbone': '../libs/backbone/backbone',
-    'handlebars': '../libs/handlebars/handlebars'
+    'handlebars': '../libs/handlebars/handlebars',
+    'font': '../libs/requirejs-plugins/src/font',
+    'propertyParser': '../libs/requirejs-plugins/src/propertyParser'
   }
 });
 
-var start = function() {
-  require(['views/app'], function(AppView){
-    new AppView;
-  });
-}
+require(['views/app', 'font!google,families:[Roboto,Pacifico]', 'font!custom,families: [qeeme],urls:[css/fonts.css]'], function(AppView) {
+  new AppView;
+});
