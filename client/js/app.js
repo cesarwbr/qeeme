@@ -10,5 +10,5 @@ require.config({
 });
 
 require(['views/app', 'font!google,families:[Roboto,Pacifico]', 'font!custom,families: [qeeme],urls:[css/fonts.css]'], function(AppView) {
-  new AppView;
+  new AppView();
 });
