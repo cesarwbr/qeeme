@@ -22,5 +22,4 @@ exports.Logger = function Logger() {
 		info: info,
 		error: error
 	};
-}
-
+};

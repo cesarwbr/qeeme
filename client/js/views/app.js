@@ -1,5 +1,5 @@
 define(['backbone', 'collections/people'], function(Backbone, People) {
-  var App = Backbone.View.extend({
+  return Backbone.View.extend({
     initialize: function() {
       this.collection = new People();
       this.collection.fetch({
@@ -9,17 +9,10 @@ define(['backbone', 'collections/people'], function(Backbone, People) {
         type: 'POST',
         success: function(data, response) {
           console.log(response);
+          this.info = response;
           loadCanvas(response.result[0]);
         }
       });
-      this.render();
-    },
-    render: function() {
-      this.collection.each(function(item) {
-        console.log(item);
-      }, this);
     }
   });
-
-  return App;
 });
