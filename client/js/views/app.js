@@ -1,4 +1,4 @@
-define(['backbone', 'collections/people', 'views/person/main-info'], function(Backbone, People, PersonMainInfo) {
+define(['backbone', 'collections/people', 'views/person/main-info', 'views/person/family'], function(Backbone, People, PersonMainInfo, Family) {
   return Backbone.View.extend({
     initialize: function() {
       this.color = {
@@ -6,7 +6,9 @@ define(['backbone', 'collections/people', 'views/person/main-info'], function(Ba
         circleBg: '#6f5f5c',
         title: '#6f5f5c',
         subtitle: '#b6a380',
-        icon: '#cfbfa2'
+        icon: '#cfbfa2',
+        female:'#db147b',
+        male: '#0092dd'
       };
 
       this.collection = new People();
@@ -21,6 +23,14 @@ define(['backbone', 'collections/people', 'views/person/main-info'], function(Ba
           self.render(response.result[0]);
           //loadCanvas(response.result[0]);
         }
+      });
+    },
+    renderSections: function(person) {
+      new Family({
+        context: this.context,
+        person: person,
+        color: this.color,
+        qeeme: this.qeeme
       });
     },
     render: function(person) {
@@ -38,6 +48,7 @@ define(['backbone', 'collections/people', 'views/person/main-info'], function(Ba
       this.renderHeader(person, function() {
         self.renderMainPhoto(person);
         self.renderMainInfo(person);
+        self.renderSections(person);
       });
 
 
@@ -91,6 +102,18 @@ define(['backbone', 'collections/people', 'views/person/main-info'], function(Ba
 
       var personImage = new Image();
 
+      // title
+      self.context.font = 'bold 20px Roboto';
+      self.context.textBaseline = 'top';
+      self.context.fillStyle = self.color.title;
+      self.context.fillText(person.name, 100, 110);
+
+      // subtitle
+      self.context.font = 'bold 12px Roboto';
+      self.context.textBaseline = 'top';
+      self.context.fillStyle = self.color.subtitle;
+      self.context.fillText(person.notable.text, 100, 135);
+
       // When the image is loaded, draw it
       personImage.onload = function() {
         // bg image
@@ -99,19 +122,6 @@ define(['backbone', 'collections/people', 'views/person/main-info'], function(Ba
         self.context.closePath();
         self.context.fillStyle = self.color.circleBg;
         self.context.fill();
-
-        // title
-        self.context.font = 'bold 20px Roboto';
-        self.context.textBaseline = 'top';
-        self.context.fillStyle = self.color.title;
-        self.context.fillText(person.name, 100, 110);
-
-        // subtitle
-        self.context.font = 'bold 12px Roboto';
-        self.context.textBaseline = 'top';
-        self.context.fillStyle = self.color.subtitle;
-        self.context.fillText(person.notable.text, 100, 130);
-
 
         // Save the state, so we can undo the clipping
         self.context.save();
