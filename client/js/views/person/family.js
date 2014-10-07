@@ -2,7 +2,7 @@ define(['backbone', 'views/section-helper'], function(Backbone, SectionHelper) {
   var Family = Backbone.View.extend({
     initialize: function(options) {
       this.positionX = options.qeeme.width / 2;
-      this.positionY = 200;
+      this.positionY = options.top;
       this.imageSize = 36;
       this.ctx = options.context;
       this.options = options;

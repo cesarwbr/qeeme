@@ -1,4 +1,8 @@
-define(['backbone', 'collections/people', 'views/person/main-info', 'views/person/family'], function(Backbone, People, PersonMainInfo, Family) {
+define(['backbone', 'collections/people', 'views/person/main-info',
+  'views/person/family', 'views/person/place-of-birth',
+  'views/person/education'
+], function(Backbone, People, PersonMainInfo, Family, PlaceOfBirth,
+  Education) {
   return Backbone.View.extend({
     initialize: function() {
       this.color = {
@@ -7,7 +11,7 @@ define(['backbone', 'collections/people', 'views/person/main-info', 'views/perso
         title: '#6f5f5c',
         subtitle: '#b6a380',
         icon: '#cfbfa2',
-        female:'#db147b',
+        female: '#db147b',
         male: '#0092dd'
       };
 
@@ -15,23 +19,31 @@ define(['backbone', 'collections/people', 'views/person/main-info', 'views/perso
       var self = this;
       this.collection.fetch({
         data: {
-          mid: '/m/01rh0w'
+          mid: '/m/02mjmr'
         },
         type: 'POST',
         success: function(data, response) {
           console.log(response);
           self.render(response.result[0]);
-          //loadCanvas(response.result[0]);
         }
       });
     },
     renderSections: function(person) {
-      new Family({
+      var conf = {
         context: this.context,
         person: person,
         color: this.color,
         qeeme: this.qeeme
-      });
+      };
+
+      conf.top = 200;
+      new Family(conf);
+
+      conf.top = 370;
+      new PlaceOfBirth(conf);
+
+      conf.top = 700;
+      new Education(conf);
     },
     render: function(person) {
       var self = this;
