@@ -27,6 +27,7 @@ define(['backbone', 'collections/people', 'views/person/main-info',
           self.render(response.result[0]);
         }
       });
+
     },
     renderSections: function(person) {
       var conf = {

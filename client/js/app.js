@@ -9,6 +9,12 @@ require.config({
   }
 });
 
-require(['views/app', 'font!google,families:[Roboto,Pacifico]', 'font!custom,families: [qeeme],urls:[css/fonts.css]'], function(AppView) {
+require(['views/app', 'helper', 'font!google,families:[Roboto,Pacifico]',
+  'font!custom,families: [qeeme],urls:[css/fonts.css]'
+], function(AppView, Helper) {
   new AppView();
+
+  Helper.deviceOrientation(function() {
+    new AppView();
+  });
 });
