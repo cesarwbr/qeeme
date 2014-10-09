@@ -1,0 +1,7 @@
+{
+  "name": "Qeeme ",
+  "description": "Test environment",
+  "repository": "https://github.com/cesarwbr/qeeme",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"]
+}
