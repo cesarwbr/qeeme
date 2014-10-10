@@ -5,7 +5,8 @@ require.config({
     'backbone': '../libs/backbone/backbone',
     'handlebars': '../libs/handlebars/handlebars.min',
     'font': '../libs/requirejs-plugins/src/font',
-    'propertyParser': '../libs/requirejs-plugins/src/propertyParser'
+    'propertyParser': '../libs/requirejs-plugins/src/propertyParser',
+    'router': 'router'
   }
 });
 

@@ -1,10 +1,18 @@
 define(['backbone', 'collections/people', 'views/person/main-info',
   'views/person/family', 'views/person/place-of-birth',
-  'views/person/education'
+  'views/person/education', 'jquery', 'underscore', 'router'
 ], function(Backbone, People, PersonMainInfo, Family, PlaceOfBirth,
-  Education) {
+  Education, $, _, router) {
   return Backbone.View.extend({
-    initialize: function() {
+    el: '.page',
+    events: {
+      'click .back': 'search'
+    },
+    search: function() {
+      this.router.navigate('', {trigger:true});
+    },
+    initialize: function(router, mid) {
+      this.router = router;
       this.color = {
         bg: '#f0e9dc',
         circleBg: '#6f5f5c',
@@ -19,11 +27,14 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       var self = this;
       this.collection.fetch({
         data: {
-          mid: '/m/02mjmr'
+          //mid: '/m/02mjmr'
+          mid: mid
         },
         type: 'POST',
         success: function(data, response) {
-          console.log(response);
+          var template = _.template($('#show').html());
+          self.$el.html(template);
+
           self.render(response.result[0]);
         }
       });

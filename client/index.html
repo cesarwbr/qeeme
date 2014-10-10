@@ -6,14 +6,26 @@
     <title>Qeeme</title>
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/main.css">
+    <script src="libs/platform/platform.js"></script>
+    <link rel="import" href="libs/freebase-search/dist/freebase-search.html">
 </head>
 <body>
-
+    <div class="page"></div>
+    <script type="text/template" id="show">
       <header>
           <div class="back icon-arrow-left"></div>
           <h1></h1>
       </header>
       <canvas id="qeeme" width="300" height="451"></canvas>
+    </script>
+
+    <script type="text/template" id="search">
+      <form class="search-form">
+        <label for="mid">mid: </label>
+        <freebase-search id="search-element" placeholder="Search for people" key="AIzaSyCQXvFx7PMLEImgshuRNJ_vlngLBCTVxkA"></freebase-search>
+        <button type="submit">Search</button>
+      </form>
+    </script>
 
     <script data-main="js/app" src="vendors/require.js"></script>
 
