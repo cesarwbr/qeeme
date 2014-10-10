@@ -1,9 +1,9 @@
 require.config({
   paths: {
-    'jquery': '../libs/jquery/dist/jquery',
-    'underscore': '../libs/underscore/underscore',
+    'jquery': '../libs/jquery/dist/jquery.min',
+    'underscore': '../libs/underscore/underscore-min',
     'backbone': '../libs/backbone/backbone',
-    'handlebars': '../libs/handlebars/handlebars',
+    'handlebars': '../libs/handlebars/handlebars.min',
     'font': '../libs/requirejs-plugins/src/font',
     'propertyParser': '../libs/requirejs-plugins/src/propertyParser'
   }
@@ -14,7 +14,7 @@ require(['backbone', 'helper', 'router', 'font!google,families:[Roboto,Pacifico]
 ], function(Backbone, Helper, Router) {
 
   new Router();
-  
+
   Backbone.history.start();
   Helper.deviceOrientation(function() {
     Backbone.history.start();
