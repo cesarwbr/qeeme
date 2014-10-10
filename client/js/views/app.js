@@ -73,13 +73,22 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         maxwidth;
     },
     renderHeader: function(person, callback) {
-      var headerImage = new Image();
+      var headerImage = new Image(),
+          headerBg = new Image();
       var self = this;
+
+      headerBg.onload = function() {
+        var ptrn = self.context.createPattern(headerBg, 'repeat'); // Create a pattern with this image, and set it to "repeat".
+        self.context.fillStyle = ptrn;
+        self.context.fillRect(0, 0, self.qeeme.width, 100); // context.fillRect(x, y, width, height);
+        callback();
+      };
+
       headerImage.onload = function() {
         if (headerImage.width < self.qeeme.width && self.qeeme.width <=
           1920) {
-          headerImage.src =
-            'http://img.wallpaperlist.com/uploads/wallpaper/files/woo/wood-floor-wallpaper-5311f9bde1bf8.jpg';
+          //headerImage.src = 'http://img.wallpaperlist.com/uploads/wallpaper/files/woo/wood-floor-wallpaper-5311f9bde1bf8.jpg';
+          headerBg.src = 'img/wood.png';
         } else {
           self.context.drawImage(headerImage, 0, headerImage.width /
             2,
@@ -89,9 +98,11 @@ define(['backbone', 'collections/people', 'views/person/main-info',
           self.context.fillStyle = '#000';
           self.context.fillRect(0, 0, headerImage.width, 100);
           self.context.globalAlpha = 1;
-          //personImage.src = self.getImageUrl(person.images[0].mid, maxwidth);
-          callback();
 
+          var ptrn = self.context.createPattern(headerImage, 'repeat'); // Create a pattern with this image, and set it to "repeat".
+          self.context.fillStyle = ptrn;
+          self.context.fillRect(0, 0, self.qeeme.width, 100); // context.fillRect(x, y, width, height);
+          callback();
         }
       };
 

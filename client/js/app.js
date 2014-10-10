@@ -9,12 +9,14 @@ require.config({
   }
 });
 
-require(['views/app', 'helper', 'font!google,families:[Roboto,Pacifico]',
+require(['backbone', 'helper', 'router', 'font!google,families:[Roboto,Pacifico]',
   'font!custom,families: [qeeme],urls:[css/fonts.css]'
-], function(AppView, Helper) {
-  new AppView();
+], function(Backbone, Helper, Router) {
 
+  new Router();
+  
+  Backbone.history.start();
   Helper.deviceOrientation(function() {
-    new AppView();
+    Backbone.history.start();
   });
 });
