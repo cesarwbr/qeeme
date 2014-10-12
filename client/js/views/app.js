@@ -9,7 +9,9 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       'click .back': 'search'
     },
     search: function() {
-      this.router.navigate('', {trigger:true});
+      this.router.navigate('', {
+        trigger: true
+      });
     },
     initialize: function(router, mid) {
       this.router = router;
@@ -32,9 +34,6 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         },
         type: 'POST',
         success: function(data, response) {
-          var template = _.template($('#show').html());
-          self.$el.html(template);
-
           self.render(response.result[0]);
         }
       });
@@ -61,10 +60,10 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       var self = this;
       console.log('rendering...');
       document.querySelector('body').style.background = this.color.bg;
-      document.querySelector('header h1').innerHTML = person.name;
+      //document.querySelector('header h1').innerHTML = person.name;
 
       this.qeeme = document.getElementById('qeeme');
-      if(window.innerWidth > 1200) {
+      if (window.innerWidth > 1200) {
         this.qeeme.width = window.innerWidth - 256;
       } else {
         this.qeeme.width = window.innerWidth;
@@ -93,7 +92,7 @@ define(['backbone', 'collections/people', 'views/person/main-info',
     },
     renderHeader: function(person, callback) {
       var headerImage = new Image(),
-          headerBg = new Image();
+        headerBg = new Image();
       var self = this;
 
       headerBg.onload = function() {
@@ -118,7 +117,8 @@ define(['backbone', 'collections/people', 'views/person/main-info',
           self.context.fillRect(0, 0, headerImage.width, 100);
           self.context.globalAlpha = 1;
 
-          var ptrn = self.context.createPattern(headerImage, 'repeat'); // Create a pattern with this image, and set it to "repeat".
+          var ptrn = self.context.createPattern(headerImage,
+            'repeat'); // Create a pattern with this image, and set it to "repeat".
           self.context.fillStyle = ptrn;
           self.context.fillRect(0, 0, self.qeeme.width, 100); // context.fillRect(x, y, width, height);
           callback();
