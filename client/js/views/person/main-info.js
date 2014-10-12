@@ -27,7 +27,7 @@ define(['backbone'], function(Backbone) {
       }
 
       if (!!dateOfBirth) {
-        this.context.fillText(dateOfBirth + ' (age ' + age + ')', qeeme.width - 131,
+        this.context.fillText(dateOfBirth + ' (age ' + age + ')', this.qeeme.width - 131,
           83);
       }
 

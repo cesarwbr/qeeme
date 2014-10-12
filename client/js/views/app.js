@@ -1,8 +1,8 @@
 define(['backbone', 'collections/people', 'views/person/main-info',
   'views/person/family', 'views/person/place-of-birth',
-  'views/person/education', 'jquery', 'underscore', 'router'
+  'views/person/education', 'jquery', 'underscore'
 ], function(Backbone, People, PersonMainInfo, Family, PlaceOfBirth,
-  Education, $, _, router) {
+  Education, $, _) {
   return Backbone.View.extend({
     el: '.page',
     events: {
@@ -64,10 +64,18 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       document.querySelector('header h1').innerHTML = person.name;
 
       this.qeeme = document.getElementById('qeeme');
-      qeeme.width = window.innerWidth;
-      qeeme.height = 1285;
+      if(window.innerWidth > 1200) {
+        this.qeeme.width = window.innerWidth - 256;
+      } else {
+        this.qeeme.width = window.innerWidth;
+      }
+
+      this.qeeme.height = 1285;
 
       this.context = this.qeeme.getContext('2d');
+
+      this.context.clearRect(0, 0, this.qeeme.width, this.qeeme.height);
+      this.qeeme.width = this.qeeme.width;
 
       this.renderHeader(person, function() {
         self.renderMainPhoto(person);

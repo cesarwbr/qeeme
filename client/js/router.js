@@ -1,16 +1,19 @@
 define(['backbone', 'views/app', 'views/search'], function(Backbone, AppView,
   SearchView) {
+
   return Backbone.Router.extend({
     routes: {
       '': 'home',
-      'show/m/:id': 'show'
+      'm/:id': 'home'
     },
-    home: function() {
+    home: function(id) {
       var searchView = new SearchView();
       searchView.render(this);
-    },
-    show: function(id) {
-      new AppView(this, '/m/' + id);
+      if (!!id) {
+        new AppView(this, '/m/' + id);
+      } else {
+        new AppView(this, '/m/02mjmr');
+      }
     }
   });
 });
