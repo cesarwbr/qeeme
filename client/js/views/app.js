@@ -4,7 +4,6 @@ define(['backbone', 'collections/people', 'views/person/main-info',
 ], function(Backbone, People, PersonMainInfo, Family, PlaceOfBirth,
   Education, $, _) {
   return Backbone.View.extend({
-    el: '.page',
     events: {
       'click .back': 'search'
     },
@@ -29,7 +28,6 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       var self = this;
       this.collection.fetch({
         data: {
-          //mid: '/m/02mjmr'
           mid: mid
         },
         type: 'POST',
@@ -69,7 +67,7 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         this.qeeme.width = window.innerWidth;
       }
 
-      this.qeeme.height = 1285;
+      this.qeeme.height = 1035;
 
       this.context = this.qeeme.getContext('2d');
 
@@ -140,7 +138,6 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       });
     },
     renderMainPhoto: function(person) {
-      console.log('rendering main info...');
       var self = this;
 
       var personImage = new Image();

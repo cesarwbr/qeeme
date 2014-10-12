@@ -1,5 +1,5 @@
 require.config({
-  urlArgs: 'v=14',
+  urlArgs: 'v=22',
   paths: {
     'jquery': '../libs/jquery/dist/jquery.min',
     'underscore': '../libs/underscore/underscore-min',
