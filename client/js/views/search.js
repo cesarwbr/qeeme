@@ -15,8 +15,8 @@ define(['backbone', 'jquery', 'underscore', 'views/app'], function(Backbone, $,
     render: function(router) {
       var that = this;
       this.router = router;
-      var template = _.template($('#search').html());
-      this.$el.html(template);
+      //var template = _.template($('#search').html());
+      //this.$el.html(template);
 
       var element = $('#search-element')[0];
       element.addEventListener('result', function(result) {
