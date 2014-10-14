@@ -11,6 +11,9 @@
   <script src="libs/platform/platform.js"></script>
   <link rel="import" href="libs/freebase-search/dist/freebase-search.html">
   <link rel="import" href="libs/core-scaffold/core-scaffold.html">
+  <link rel="import" href="libs/core-menu/core-menu.html">
+  <link rel="import" href="libs/core-item/core-item.html">
+
 </head>
 
 <body>
@@ -19,6 +22,11 @@
       <core-toolbar>
         <freebase-search topic="/people/person" width="226px" style="font-size: 15px" id="search-element" placeholder="Search for people" key="AIzaSyCQXvFx7PMLEImgshuRNJ_vlngLBCTVxkA"></freebase-search>
       </core-toolbar>
+      <core-menu>
+        <core-item icon="history" label="History" horizontal center layout active></core-item>
+        <core-menu class="listHistory">
+        </core-menu>
+      </core-menu>
     </core-header-panel>
     <div tool="" style="margin: 0 auto; padding-right: 58px;padding-top: 28px;">
       <svg style="height: 90px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="862 408 125 163">
@@ -64,6 +72,14 @@
     </div>
     <canvas id="qeeme" width="300" height="451"></canvas>
   </core-scaffold>
+
+  <script type="text/template" id="listHistoryTpl">
+    <% _.each(people, function(person) { %>
+      <core-item icon="account-circle" label="<%= person.name %>" horizontal center layout>
+        <a href="#<%= person.mid %>"></a>
+      </core-item>
+    <% }); %>
+  </script>
 
   <script data-main="js/app" src="vendors/require.js"></script>
 

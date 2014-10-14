@@ -1,5 +1,5 @@
-define(['backbone', 'views/app', 'views/search'], function(Backbone, AppView,
-  SearchView) {
+define(['backbone', 'views/app', 'views/search', 'views/history'], function(Backbone, AppView,
+  SearchView, HistoryView) {
 
   return Backbone.Router.extend({
     routes: {
@@ -7,6 +7,9 @@ define(['backbone', 'views/app', 'views/search'], function(Backbone, AppView,
       'm/:id': 'home'
     },
     home: function(id) {
+      var historyView = new HistoryView();
+      historyView.render();
+      
       var searchView = new SearchView();
       searchView.render(this);
       if (!!id) {

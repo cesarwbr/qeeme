@@ -26,15 +26,26 @@ define(['backbone', 'collections/people', 'views/person/main-info',
 
       this.collection = new People();
       var self = this;
-      this.collection.fetch({
-        data: {
-          mid: mid
-        },
-        type: 'POST',
-        success: function(data, response) {
-          self.render(response.result[0]);
+      if(!!sessionStorage) {
+        var personData = sessionStorage.getItem(mid);
+        if(!!personData) {
+          self.render(JSON.parse(personData));
+        } else {
+          this.collection.fetch({
+            data: {
+              mid: mid
+            },
+            type: 'POST',
+            success: function(data, response) {
+              self.render(response.result[0]);
+              if (!!sessionStorage) {
+                sessionStorage.setItem(mid, JSON.stringify(response.result[0]));
+              }
+            }
+          });
         }
-      });
+      }
+
 
     },
     renderSections: function(person) {
