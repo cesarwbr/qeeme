@@ -21,7 +21,8 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         subtitle: '#b6a380',
         icon: '#cfbfa2',
         female: '#db147b',
-        male: '#0092dd'
+        male: '#0092dd',
+        shadow: '#000000'
       };
 
       this.collection = new People();
@@ -108,6 +109,11 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         var ptrn = self.context.createPattern(headerBg, 'repeat'); // Create a pattern with this image, and set it to "repeat".
         self.context.fillStyle = ptrn;
         self.context.fillRect(0, 0, self.qeeme.width, 100); // context.fillRect(x, y, width, height);
+
+        self.context.globalAlpha=0.45;
+        self.context.fillStyle = self.color.shadow;
+        self.context.fillRect(0,58,self.qeeme.width, 43);
+        self.context.globalAlpha = 1;
         callback();
       };
 
@@ -130,6 +136,12 @@ define(['backbone', 'collections/people', 'views/person/main-info',
             'repeat'); // Create a pattern with this image, and set it to "repeat".
           self.context.fillStyle = ptrn;
           self.context.fillRect(0, 0, self.qeeme.width, 100); // context.fillRect(x, y, width, height);
+
+          self.context.globalAlpha=0.6;
+          self.context.fillStyle = self.color.shadow;
+          self.context.fillRect(0,50,self.qeeme.width, 50);
+          self.context.globalAlpha = 1;
+
           callback();
         }
       };
@@ -177,6 +189,7 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         // Save the state, so we can undo the clipping
         self.context.save();
 
+        self.context.imageSmoothingEnabled= true;
         // Create a circle
         self.context.beginPath();
         var r,
@@ -202,9 +215,16 @@ define(['backbone', 'collections/people', 'views/person/main-info',
 
         //self.context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
         self.context.drawImage(personImage, redfx, redfy);
+        self.context.globalCompositeOperation = 'source-atop';
 
         // Undo the clipping
         self.context.restore();
+        self.context.beginPath();
+        self.context.arc(posx, posy, 50, 0, Math.PI * 2, false);
+        self.context.lineWidth = 2;
+        self.context.strokeStyle =  self.color.circleBg;
+        self.context.stroke();
+
       };
 
       personImage.src = this.getImageUrl(person.images[0].mid, 100);

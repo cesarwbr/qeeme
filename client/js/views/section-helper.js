@@ -83,6 +83,13 @@ define(function() {
 
         // Undo the clipping
         conf.ctx.restore();
+
+        conf.ctx.restore();
+        conf.ctx.beginPath();
+        conf.ctx.arc(posx, posy, r, 0, Math.PI * 2, false);
+        conf.ctx.lineWidth = 2;
+        conf.ctx.strokeStyle =  '#f0e9dc';
+        conf.ctx.stroke();
       };
 
       mapImage.src = url;

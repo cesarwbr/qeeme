@@ -134,6 +134,13 @@ define(['backbone', 'views/section-helper'], function(Backbone, SectionHelper) {
         //
         // // Undo the clipping
         self.ctx.restore();
+
+        self.ctx.restore();
+        self.ctx.beginPath();
+        self.ctx.arc(posx, posy, r, 0, Math.PI * 2, false);
+        self.ctx.lineWidth = 2;
+        self.ctx.strokeStyle =  self.options.color.circleBg;
+        self.ctx.stroke();
       };
 
       familyImage.src = getImageUrl(imageId, self.imageSize);
