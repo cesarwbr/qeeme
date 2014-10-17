@@ -1,8 +1,8 @@
 define(['backbone', 'collections/people', 'views/person/main-info',
   'views/person/family', 'views/person/place-of-birth',
-  'views/person/education', 'jquery', 'underscore'
+  'views/person/education', 'jquery', 'underscore', 'views/history'
 ], function(Backbone, People, PersonMainInfo, Family, PlaceOfBirth,
-  Education, $, _) {
+  Education, $, _, History) {
   return Backbone.View.extend({
     events: {
       'click .back': 'search'
@@ -26,25 +26,25 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       };
 
       this.collection = new People();
+      this.history = new History();
+
       var self = this;
-      if(!!sessionStorage) {
-        var personData = sessionStorage.getItem(mid);
-        if(!!personData) {
-          self.render(JSON.parse(personData));
-        } else {
-          this.collection.fetch({
-            data: {
-              mid: mid
-            },
-            type: 'POST',
-            success: function(data, response) {
-              self.render(response.result[0]);
-              if (!!sessionStorage) {
-                sessionStorage.setItem(mid, JSON.stringify(response.result[0]));
-              }
-            }
-          });
-        }
+
+      var personData = this.history.get(mid);
+
+      if (!!personData) {
+        self.render(personData);
+      } else {
+        this.collection.fetch({
+          data: {
+            mid: mid
+          },
+          type: 'POST',
+          success: function(data, response) {
+            self.render(response.result[0]);
+            this.history.add(response.result[0]);
+          }
+        });
       }
 
 
@@ -110,9 +110,9 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         self.context.fillStyle = ptrn;
         self.context.fillRect(0, 0, self.qeeme.width, 100); // context.fillRect(x, y, width, height);
 
-        self.context.globalAlpha=0.45;
+        self.context.globalAlpha = 0.45;
         self.context.fillStyle = self.color.shadow;
-        self.context.fillRect(0,58,self.qeeme.width, 43);
+        self.context.fillRect(0, 58, self.qeeme.width, 43);
         self.context.globalAlpha = 1;
         callback();
       };
@@ -137,9 +137,9 @@ define(['backbone', 'collections/people', 'views/person/main-info',
           self.context.fillStyle = ptrn;
           self.context.fillRect(0, 0, self.qeeme.width, 100); // context.fillRect(x, y, width, height);
 
-          self.context.globalAlpha=0.6;
+          self.context.globalAlpha = 0.6;
           self.context.fillStyle = self.color.shadow;
-          self.context.fillRect(0,50,self.qeeme.width, 50);
+          self.context.fillRect(0, 50, self.qeeme.width, 50);
           self.context.globalAlpha = 1;
 
           callback();
@@ -189,7 +189,7 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         // Save the state, so we can undo the clipping
         self.context.save();
 
-        self.context.imageSmoothingEnabled= true;
+        self.context.imageSmoothingEnabled = true;
         // Create a circle
         self.context.beginPath();
         var r,
@@ -222,7 +222,7 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         self.context.beginPath();
         self.context.arc(posx, posy, 50, 0, Math.PI * 2, false);
         self.context.lineWidth = 2;
-        self.context.strokeStyle =  self.color.circleBg;
+        self.context.strokeStyle = self.color.circleBg;
         self.context.stroke();
 
       };
