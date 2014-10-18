@@ -16,6 +16,7 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     },
     add: function(mid, data) {
       if (!!sessionStorage) {
+        data.created = new Date();
         sessionStorage.setItem(mid, JSON.stringify(data));
       }
     },
@@ -25,6 +26,10 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 
       keys.forEach(function(key) {
         people.push(JSON.parse(sessionStorage.getItem(key)));
+      });
+
+      people.sort(function(a, b) {
+        return new Date(b.created) - new Date(a.created);
       });
 
       var template = _.template($('#listHistoryTpl').html());

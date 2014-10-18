@@ -42,7 +42,7 @@ define(['backbone', 'collections/people', 'views/person/main-info',
           type: 'POST',
           success: function(data, response) {
             self.render(response.result[0]);
-            this.history.add(response.result[0]);
+            self.history.add(mid, response.result[0]);
           }
         });
       }
