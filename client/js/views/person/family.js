@@ -123,16 +123,14 @@ define(['backbone', 'views/section-helper'], function(Backbone, SectionHelper) {
         var posx = r + redfx;
         var posy = r + redfy;
 
-        //self.ctx.arc(qeeme.width / 2, qeeme.height / 2, r, 0, Math.PI * 2, false);
         self.ctx.arc(posx, posy, r, 0, Math.PI * 2, false);
 
         // Clip to the current path
         self.ctx.clip();
 
-        //self.ctx.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
         self.ctx.drawImage(familyImage, redfx, redfy);
-        //
-        // // Undo the clipping
+        
+        // Undo the clipping
         self.ctx.restore();
 
         self.ctx.restore();

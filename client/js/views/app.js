@@ -147,9 +147,10 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       };
 
       if (!!person.images && person.images.length > 0) {
-        headerImage.src = this.getImageUrl(person.images[0].mid, this
-          .qeeme
-          .width);
+        headerImage.src = this.getImageUrl(person.images[0].mid,
+          this.qeeme.width);
+      } else {
+        headerBg.src = 'img/wood.png';
       }
     },
     renderMainInfo: function(person) {
@@ -177,14 +178,15 @@ define(['backbone', 'collections/people', 'views/person/main-info',
       self.context.fillStyle = self.color.subtitle;
       self.context.fillText(person.notable.text, 100, 135);
 
+      // bg image
+      self.context.beginPath();
+      self.context.arc(57, 75, 55, 0, Math.PI * 2, false);
+      self.context.closePath();
+      self.context.fillStyle = self.color.circleBg;
+      self.context.fill();
+
       // When the image is loaded, draw it
       personImage.onload = function() {
-        // bg image
-        self.context.beginPath();
-        self.context.arc(57, 75, 55, 0, Math.PI * 2, false);
-        self.context.closePath();
-        self.context.fillStyle = self.color.circleBg;
-        self.context.fill();
 
         // Save the state, so we can undo the clipping
         self.context.save();
@@ -206,14 +208,11 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         var posx = r + redfx;
         var posy = r + redfy;
 
-        console.log('raio=' + r);
-        //self.context.arc(qeeme.width / 2, qeeme.height / 2, r, 0, Math.PI * 2, false);
         self.context.arc(posx, posy, r, 0, Math.PI * 2, false);
 
         // Clip to the current path
         self.context.clip();
 
-        //self.context.drawImage(personImage, (qeeme.width / 2) - r, (qeeme.height / 2) - r, qeeme.width, qeeme.height);
         self.context.drawImage(personImage, redfx, redfy);
         self.context.globalCompositeOperation = 'source-atop';
 
@@ -226,8 +225,15 @@ define(['backbone', 'collections/people', 'views/person/main-info',
         self.context.stroke();
 
       };
-
-      personImage.src = this.getImageUrl(person.images[0].mid, 100);
+      if (!!person.images && person.images.length > 0) {
+        personImage.src = this.getImageUrl(person.images[0].mid, 100);
+      } else { // no image
+        var icon = person.gender.toLowerCase() === 'male' ? 'o' : 'n';
+        self.context.font = '58px qeeme';
+        self.context.textBaseline = 'top';
+        self.context.fillStyle = 'white';
+        self.context.fillText(icon, 30, 45);
+      }
 
     }
   });
