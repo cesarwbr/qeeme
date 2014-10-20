@@ -28,7 +28,7 @@
     "handlebars": "~2.0.0",
     "requirejs": "~2.1.15",
     "requirejs-plugins": "~1.0.2",
-    "freebase-search": "~0.0.13",
+    "freebase-search": "~0.0.15",
     "core-scaffold": "Polymer/core-scaffold#~0.4.2",
     "core-menu": "Polymer/core-menu#~0.4.2"
   }
