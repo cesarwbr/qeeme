@@ -1,12 +1,13 @@
 require.config({
-  urlArgs: 'v=44',
+  urlArgs: 'v=47',
   paths: {
     'jquery': '../libs/jquery/dist/jquery.min',
     'underscore': '../libs/underscore/underscore-min',
     'backbone': '../libs/backbone/backbone',
     'handlebars': '../libs/handlebars/handlebars.min',
     'font': '../libs/requirejs-plugins/src/font',
-    'propertyParser': '../libs/requirejs-plugins/src/propertyParser'
+    'propertyParser': '../libs/requirejs-plugins/src/propertyParser',
+    'tpl': '../vendors/tpl'
   }
 });
 

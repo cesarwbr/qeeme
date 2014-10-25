@@ -1,6 +1,7 @@
-define(['backbone', 'underscore'], function(Backbone, _) {
+define(['backbone', 'underscore', 'tpl!../../tpl/list-history.tpl'], function(Backbone, _, tpl) {
   return Backbone.View.extend({
     el: '.listHistory',
+    tpl: tpl,
     get: function(mid) {
       if (!sessionStorage) {
         return false;
@@ -32,8 +33,7 @@ define(['backbone', 'underscore'], function(Backbone, _) {
         return new Date(b.created) - new Date(a.created);
       });
 
-      var template = _.template($('#listHistoryTpl').html());
-      var result = template({
+      var result = tpl({
         people: people
       });
       this.$el.html(result);
