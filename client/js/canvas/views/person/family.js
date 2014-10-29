@@ -1,4 +1,4 @@
-define(['backbone', 'views/section-helper'], function(Backbone, SectionHelper) {
+define(['backbone', 'canvas/views/section-helper'], function(Backbone, SectionHelper) {
   var Family = Backbone.View.extend({
     initialize: function(options) {
       this.positionX = options.qeeme.width / 2;
@@ -129,7 +129,7 @@ define(['backbone', 'views/section-helper'], function(Backbone, SectionHelper) {
         self.ctx.clip();
 
         self.ctx.drawImage(familyImage, redfx, redfy);
-        
+
         // Undo the clipping
         self.ctx.restore();
 
@@ -141,8 +141,14 @@ define(['backbone', 'views/section-helper'], function(Backbone, SectionHelper) {
         self.ctx.stroke();
       };
 
-      familyImage.src = getImageUrl(imageId, self.imageSize);
+      familyImage.src = this.getImageUrl(imageId, self.imageSize);
       return true;
+    },
+    getImageUrl: function(imageMid, maxwidth) {
+      return 'https://www.googleapis.com/freebase/v1/image' +
+        imageMid + '?' +
+        'key=AIzaSyCQXvFx7PMLEImgshuRNJ_vlngLBCTVxkA' + '&maxwidth=' +
+        maxwidth;
     },
     renderIconPhoto: function(iconColor, iconLetter, position) {
       this.ctx.font = '23px qeeme';

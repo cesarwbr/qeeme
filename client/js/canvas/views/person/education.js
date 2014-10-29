@@ -1,4 +1,4 @@
-define(['backbone', 'views/section-helper'], function(Backbone, SectionHelper) {
+define(['backbone', 'canvas/views/section-helper'], function(Backbone, SectionHelper) {
   var Education = Backbone.View.extend({
     initialize: function(options) {
       this.positionX = options.qeeme.width / 2;

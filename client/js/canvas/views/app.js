@@ -1,6 +1,6 @@
-define(['backbone', 'collections/people', 'views/person/main-info',
-  'views/person/family', 'views/person/place-of-birth',
-  'views/person/education', 'jquery', 'underscore', 'views/history'
+define(['backbone', 'collections/people', 'canvas/views/person/main-info',
+  'canvas/views/person/family', 'canvas/views/person/place-of-birth',
+  'canvas/views/person/education', 'jquery', 'underscore', 'canvas/views/history'
 ], function(Backbone, People, PersonMainInfo, Family, PlaceOfBirth,
   Education, $, _, History) {
   return Backbone.View.extend({
@@ -68,7 +68,6 @@ define(['backbone', 'collections/people', 'views/person/main-info',
     },
     render: function(person) {
       var self = this;
-      console.log('rendering...');
       document.querySelector('body').style.background = this.color.bg;
       //document.querySelector('header h1').innerHTML = person.name;
 

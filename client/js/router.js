@@ -1,4 +1,4 @@
-define(['backbone', 'views/app', 'views/search', 'views/history'], function(Backbone, AppView,
+define(['backbone', 'canvas/views/app', 'canvas/views/search', 'canvas/views/history'], function(Backbone, AppView,
   SearchView, HistoryView) {
 
   return Backbone.Router.extend({
@@ -14,7 +14,10 @@ define(['backbone', 'views/app', 'views/search', 'views/history'], function(Back
       searchView.render(this);
 
       var mainPanel = $('#main-panel')[0];
-      mainPanel.closeDrawer();
+
+      if(!!mainPanel.closeDrawer) {
+          mainPanel.closeDrawer();
+      }
 
       if (!!id) {
         new AppView(this, '/m/' + id);

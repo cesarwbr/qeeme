@@ -1,4 +1,4 @@
-define(['backbone', 'jquery', 'underscore', 'views/app'], function(Backbone, $,
+define(['backbone', 'jquery', 'underscore', 'canvas/views/app'], function(Backbone, $,
   _, AppView) {
   return Backbone.View.extend({
     render: function(router) {

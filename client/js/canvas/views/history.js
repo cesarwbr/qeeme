@@ -1,4 +1,4 @@
-define(['backbone', 'underscore', 'tpl!../../tpl/list-history.tpl'], function(Backbone, _, tpl) {
+define(['backbone', 'underscore', 'tpl!../../../tpl/list-history.tpl'], function(Backbone, _, tpl) {
   return Backbone.View.extend({
     el: '.listHistory',
     tpl: tpl,
