@@ -1,20 +1,24 @@
 require.config({
+  urlArgs: 'v=66',
   paths: {
-    'jquery': '../libs/jquery/dist/jquery',
-    'underscore': '../libs/underscore/underscore',
+    'jquery': '../libs/jquery/dist/jquery.min',
+    'underscore': '../libs/underscore/underscore-min',
     'backbone': '../libs/backbone/backbone',
-    'handlebars': '../libs/handlebars/handlebars',
+    'handlebars': '../libs/handlebars/handlebars.min',
     'font': '../libs/requirejs-plugins/src/font',
-    'propertyParser': '../libs/requirejs-plugins/src/propertyParser'
+    'propertyParser': '../libs/requirejs-plugins/src/propertyParser',
+    'tpl': '../vendors/tpl'
   }
 });
 
-require(['views/app', 'helper', 'font!google,families:[Roboto,Pacifico]',
+require(['backbone', 'helper', 'router',
+  'font!google,families:[Roboto,Pacifico]',
   'font!custom,families: [qeeme],urls:[css/fonts.css]'
-], function(AppView, Helper) {
-  new AppView();
+], function(Backbone, Helper, Router) {
+  new Router();
 
+  Backbone.history.start();
   Helper.deviceOrientation(function() {
-    new AppView();
+    Backbone.history.start();
   });
 });

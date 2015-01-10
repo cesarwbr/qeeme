@@ -4,15 +4,15 @@ define(function() {
       // line before
       obj.context.beginPath();
       obj.context.moveTo(0, obj.position.y);
-      obj.context.lineTo((qeeme.width / 2) - 30, obj.position.y);
+      obj.context.lineTo((obj.qeeme.width / 2) - 30, obj.position.y);
       obj.context.strokeStyle = obj.color.circleBg;
       obj.context.lineWidth = 1;
       obj.context.stroke();
 
       // line after
       obj.context.beginPath();
-      obj.context.moveTo((qeeme.width / 2) + 30, obj.position.y);
-      obj.context.lineTo(qeeme.width, obj.position.y);
+      obj.context.moveTo((obj.qeeme.width / 2) + 30, obj.position.y);
+      obj.context.lineTo(obj.qeeme.width, obj.position.y);
       obj.context.strokeStyle = obj.color.circleBg;
       obj.context.lineWidth = 1;
       obj.context.stroke();
@@ -21,12 +21,12 @@ define(function() {
       obj.context.font = '35px qeeme';
       obj.context.textBaseline = 'top';
       obj.context.fillStyle = obj.color.icon;
-      obj.context.fillText(obj.icon, (qeeme.width / 2) - 17, obj.position
+      obj.context.fillText(obj.icon, (obj.qeeme.width / 2) - 17, obj.position
         .y - 15);
 
       // icon circle
       obj.context.beginPath();
-      obj.context.arc((qeeme.width / 2), obj.position.y, 25, 0, Math.PI *
+      obj.context.arc((obj.qeeme.width / 2), obj.position.y, 25, 0, Math.PI *
         2, false);
       obj.context.closePath();
       obj.context.strokeStyle = obj.color.circleBg;
@@ -38,7 +38,7 @@ define(function() {
         obj.context.font = 'bold 12px Roboto';
         obj.context.textBaseline = 'top';
         obj.context.fillStyle = obj.color.subtitle;
-        obj.context.fillText(obj.title, (qeeme.width / 2) - parseInt(obj.context
+        obj.context.fillText(obj.title, (obj.qeeme.width / 2) - parseInt(obj.context
           .measureText(
             obj.title).width /
           2), obj.position.y + 30);
@@ -83,6 +83,13 @@ define(function() {
 
         // Undo the clipping
         conf.ctx.restore();
+
+        conf.ctx.restore();
+        conf.ctx.beginPath();
+        conf.ctx.arc(posx, posy, r, 0, Math.PI * 2, false);
+        conf.ctx.lineWidth = 2;
+        conf.ctx.strokeStyle =  '#f0e9dc';
+        conf.ctx.stroke();
       };
 
       mapImage.src = url;
