@@ -1,0 +1,1 @@
+Downloaded Images will be placed in this directory
